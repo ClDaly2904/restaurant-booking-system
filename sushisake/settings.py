@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'restaurantbookings',
+    'restaurantbookings.booking_functions',
 ]
 
 MIDDLEWARE = [
