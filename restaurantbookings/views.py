@@ -25,10 +25,13 @@ class BookingView(FormView):
         table_list = Table.objects.filter(location=data['table_location'])
 
         available_tables = []
+        people = data['people']
 
         for table in table_list:
-            if check_availability(table, data['booking_date_time_start'], data['booking_date_time_end'], data['people']):
-                available_tables.append(table)
+            if check_availability(table, data['booking_date_time_start'], data['booking_date_time_end']):
+                # check table is big enough for number of people
+                if table.no_seats >= people:
+                    available_tables.append(table)
 
         if len(available_tables) > 0:
             table = available_tables[0]
