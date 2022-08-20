@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views.generic import ListView, FormView
+from restaurantbookings.booking_functions.availability import check_availability
 from .models import Table, Booking
 from .forms import AvailabilityForm
-from .booking_functions.availability import check_availability
 
 
 # Create your views here.
@@ -25,12 +25,21 @@ class BookingView(FormView):
         table_list = Table.objects.filter(location=data['table_location'])
 
         available_tables = []
-        
+
         for table in table_list:
-            if check_availability(table, data['booking_date_time_start'], data['booking_date_time_end']):
+            if check_availability(table, data['booking_date_time_start'], data['booking_date_time_end'], data['people']):
                 available_tables.append(table)
-        
-        room = available_tables[0]
-        booking = Booking.objects.create(
-            user = request.user
-        )
+
+        if len(available_tables) > 0:
+            table = available_tables[0]
+            booking = Booking.objects.create(
+                guest=self.request.user,
+                table=table,
+                people=data['people'],
+                booking_date_time_start=data['booking_date_time_start'],
+                booking_date_time_end=data['booking_date_time_end']
+            )
+            booking.save()
+            return HttpResponse(booking)
+        else:
+            return HttpResponse('This table type is fully booked')
