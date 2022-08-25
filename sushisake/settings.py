@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'restaurantbookings',
     'restaurantbookings.booking_functions',
+    'sushisake'
 ]
 
 SITE_ID = 1

@@ -46,3 +46,7 @@ class BookingView(FormView):
             return HttpResponse(booking)
         else:
             return HttpResponse('This table type is fully booked')
+
+
+def get_homepage(request):
+    return render(request, 'sushisake/index.html')
