@@ -1,0 +1,35 @@
+/* General Styles */
+
+h1 {
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
+h4, body {
+    font-family: 'Assistant', sans-serif;
+}
+
+/* Navbar */
+.brand-text h1 {
+    color: #ef716b ;
+    line-height: 30px;
+}
+
+.brand-text p {
+    font-size: 80%;
+    padding: 0;
+    text-align: center;
+    line-height: 5px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.navbar-brand:hover {
+    text-decoration: none;
+}
+
+/* Footer */
+footer {
+    background-color: #f8be57;
+}
