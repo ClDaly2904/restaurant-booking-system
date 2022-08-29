@@ -2,27 +2,31 @@
 
 h1 {
     font-family: 'Alegreya Sans', sans-serif;
+    color: #ef716b;
 }
 
 h4, body {
     font-family: 'Assistant', sans-serif;
+    color: #555b50;
 }
 
+a {
+    color: #ef716b;
+}
 
 /* Navbar */
 
 nav {
     border-bottom: 2px solid #ef716b;
+    background-color: rgba(0, 0, 0, 0.9)
 }
 
 .navbar {
     padding: 0;
 }
 
-.book-action {
-    background-color: #f8be57;
-    border-radius: 10%;
-    border: 2px solid #555b50;
+.nav-link {
+    color: whitesmoke;
 }
 
 .brand-text p {
@@ -30,6 +34,7 @@ nav {
     padding: 0;
     text-align: center;
     line-height: 0;
+    color: white;
 }
 
 nav a {
@@ -37,18 +42,27 @@ nav a {
     padding-bottom: 0;
 }
 
-nav a:hover {
+.nav-link:hover {
     text-decoration: underline;
+    color: #ef716b;
 }
 
 .navbar-brand:hover {
     text-decoration: none;
 }
 
+.book-action:hover {
+    background-color: white;
+}
+
+.book-action a:hover {
+    text-decoration: none;
+}
+
 #brand-title p {
     font-family: 'Alegreya Sans', sans-serif;
-    color: #ef716b ;
-    font-size: 1.8rem;
+    color: #f8be57 ;
+    font-size: 2.2rem;
     padding: 0;
     margin-top: 20px;
 }
@@ -65,4 +79,33 @@ footer {
 footer i {
     color: #555b50 ;
     font-size: 1rem;
+}
+
+
+/* Account pages */
+
+.login {
+    margin-top: 40px;
+}
+
+.account-background {
+    background-image: url(https://res.cloudinary.com/cld2904/image/upload/v1661793691/koi-carp-g16760f884_1280_co4fty.png);
+    background-repeat: repeat;
+    height: 100vh;
+}
+
+.transbox {
+    color: white;
+    padding: 5%;
+    margin-top: 2%;
+    background-color: rgba(0, 0, 0, 0.6)
+}
+
+
+/* Buttons */
+
+.btn-sign {
+    background-color: #f8be57;
+    border-radius: 10%;
+    border: 2px solid #555b50;
 }
