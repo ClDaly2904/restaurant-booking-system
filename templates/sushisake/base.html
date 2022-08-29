@@ -24,10 +24,10 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
             <a class="navbar-brand" id="logo" href="{% url 'home' %}">
-                <img src="https://res.cloudinary.com/cld2904/image/upload/v1661461922/sushivector_kfl899.png" width="80" class="d-inline-block align-middle">
+                <img src="https://res.cloudinary.com/cld2904/image/upload/v1661461922/sushivector_kfl899.png" width="60" class="d-inline-block align-middle">
                     <div class="brand-text d-inline-block align-middle">
-                        <div><h1>Sushi & Sake</h1></div>
-                        <div><p>JAPANESE KITCHEN</p></div>
+                        <div class="align-bottom" id="brand-title"><p>Sushi & Sake</p></div>
+                        <div class="align-top"><p>JAPANESE KITCHEN</p></div>
                     </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -36,14 +36,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <li class="nav-item book-action">
+                        <a class="nav-link active" aria-current="page" href="#">BOOK NOW</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Menu</a>
+                        <a class="nav-link active" aria-current="page" href="#">HOME</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Contact</a>
+                        <a class="nav-link active" aria-current="page" href="#">MENU</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">CONTACT</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
@@ -51,10 +54,8 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                        <a class="nav-link d-inline-block" href="{% url 'account_signup' %}">Register</a>/
+                        <a class="nav-link d-inline-block" href="{% url 'account_login' %}">Login</a>
                     </li>
                     {% endif %}
 
@@ -72,20 +73,12 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer mt-auto py-3">
-        <div class="row justify-content-evenly">
-            <div class="col-4">
-                <p class="m-0">Contact us:
-                    <i class="fa-solid fa-phone ms-3"></i> 01234 567 890
-                    <i class="fab fa-solid fa-envelope ms-3"></i> contact@sushisake.co.uk
-            </div>
-            <div class="col-4">
+    <footer class="footer mt-auto py-3 text-center">
                 <p class="m-0">Follow us:
-                    <i class="fab fa-facebook-square ms-3" href="https://www.facebook.com/"></i>
-                    <i class="fab fa-instagram-square ms-3" href="https://www.instagram.com/"></i>
-                    <i class="fab fa-twitter-square ms-3" href="https://www.twitter.com/"></i></p>
-            </div>
-        </div>
+                    <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook ms-3" ></i></a>
+                    <a href="https://instagram.com/" target="_blank"><i class="fa-brands fa-instagram ms-3"></i></a>
+                    <a href="https://twitter.com/" target="blank"><i class="fa-brands fa-twitter ms-3"></i></a>
+                </p>
     </footer>
 </body>
 
