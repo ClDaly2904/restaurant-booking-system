@@ -18,7 +18,13 @@ a {
 
 nav {
     border-bottom: 2px solid #ef716b;
-    background-color: rgba(0, 0, 0, 0.9)
+    background-color: rgba(0, 0, 0, 0.85)
+}
+
+.navbar-toggler-icon {
+    background-color: #ef716b;
+    border-radius: 10%;
+    border: 2px solid #f8be57
 }
 
 .navbar {
@@ -42,6 +48,10 @@ nav a {
     padding-bottom: 0;
 }
 
+.book-action a {
+    color: black;
+}
+
 .nav-link:hover {
     text-decoration: underline;
     color: #ef716b;
@@ -52,11 +62,13 @@ nav a {
 }
 
 .book-action:hover {
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 2px solid #f8be57
 }
 
 .book-action a:hover {
     text-decoration: none;
+    color: white;
 }
 
 #brand-title p {

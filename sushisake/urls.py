@@ -22,5 +22,5 @@ urlpatterns = [
     path('', include('restaurantbookings.urls')),
     path('accounts/', include('allauth.urls')),
     path('', get_homepage, name='home'),
-    path('book/', BookingView.as_view(), name='booking_view'),
+    path('book/', BookingView.as_view(), name='BookTable'),
 ]

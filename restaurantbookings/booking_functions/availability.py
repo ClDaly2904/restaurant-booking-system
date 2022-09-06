@@ -1,5 +1,4 @@
-import datetime
-from restaurantbookings.models import Table, Booking
+from restaurantbookings.models import Booking
 
 
 def check_availability(table, booking_date_time_start, booking_date_time_end):
