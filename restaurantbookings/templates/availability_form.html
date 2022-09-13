@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mt-3 offset-md-2 transbox">
-                <h1>Book a Table</h1>
+                <h1 class="border-bottom">Book a Table</h1>
                 {% if user.is_authenticated %}
                     <form action="" method="POST">
                         {{ form.as_p }}

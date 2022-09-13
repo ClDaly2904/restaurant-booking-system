@@ -2,16 +2,37 @@
 
 h1 {
     font-family: 'Alegreya Sans', sans-serif;
+    color: #f8be57;
+}
+
+h2 {
+    font-family: 'Alegreya Sans', sans-serif;
     color: #ef716b;
+}
+
+h3 {
+    font-family: 'Assistant', sans-serif;
+    color: #f8be57;
 }
 
 h4, body {
     font-family: 'Assistant', sans-serif;
-    color: #555b50;
+    color: whitesmoke;
 }
 
 a {
     color: #ef716b;
+}
+
+.logo-divider {
+    padding-top: 4%;
+}
+
+.transbox {
+    color: white;
+    padding: 5%;
+    margin-top: 2%;
+    background-color: rgba(0, 0, 0, 0.6)
 }
 
 /* Navbar */
@@ -106,18 +127,81 @@ footer i {
     height: 100vh;
 }
 
-.transbox {
-    color: white;
-    padding: 5%;
-    margin-top: 2%;
-    background-color: rgba(0, 0, 0, 0.6)
-}
-
-
 /* Buttons */
 
 .btn-sign {
     background-color: #f8be57;
     border-radius: 10%;
     border: 2px solid #555b50;
+}
+
+.cta {
+    font-size: 1.6rem;
+    padding: 1%;
+}
+
+.cta:hover {
+    color: white;
+}
+
+/* Home Page */
+
+/* Header */ 
+.home-background {
+    background-image: url(https://res.cloudinary.com/cld2904/image/upload/v1661793691/koi-carp-g16760f884_1280_co4fty.png);
+    background-repeat: repeat;
+    height: fit-content;
+}
+
+.home-jumbotron {
+    background-image: url(https://res.cloudinary.com/cld2904/image/upload/v1663088326/japanesestreet_joit9v.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+#jumbotron-title h1 {
+    padding: 0;
+    margin-top: 40px;
+    font-size: 4.4rem;
+    line-height: 40px;
+}
+
+.jumbotron-bottom p {
+    padding: 0;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    line-height: 20px;
+}
+
+/* Carousel */
+
+.paper-background {
+    background-image: url(https://res.cloudinary.com/cld2904/image/upload/v1663094062/paper-background_izc5wr.jpg);
+    background-repeat: repeat;
+    height: fit-content;
+    padding: 2%;
+    text-align: center;
+}
+
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-outer {
+    width: 50%;
+}
+
+.gallery-title {
+    padding: 2%;
+}
+
+.gallery-title h2 {
+    color: #555b50;
 }
