@@ -26,3 +26,22 @@ class Booking(models.Model):
 
     def __str__(self):
         return f'{self.guest} has booked a table for {self.people} people for {self.booking_date_time_start} until {self.booking_date_time_end}'
+
+
+class FoodItem(models.Model):
+    """ Contains information for food items on menu including name, price, dietary"""
+    categories = (
+        ('SHARERS', 'sharers'),
+        ('PLATTERS', 'platters'),
+        ('SUSHI', 'sushi'),
+        ('LARGE PLATES', 'large plates'),
+        ('DESSERTS', 'desserts'),
+    )
+    category = models.CharField(max_length=12, choices=categories)
+    name = models.CharField(max_length=20)
+    dietaryinfo = models.CharField(max_length=20, blank=True)
+    description = models.CharField(max_length=50)
+    price = models.DecimalField(max_digits=4, decimal_places=2)
+
+    def __str__(self):
+        return f'{self.name}: {self.price}, {self.dietaryinfo}'

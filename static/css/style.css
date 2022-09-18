@@ -23,7 +23,6 @@ h4, body {
 a {
     color: #ef716b;
 }
-
 .logo-divider {
     padding-top: 4%;
 }
@@ -33,6 +32,10 @@ a {
     padding: 5%;
     margin-top: 2%;
     background-color: rgba(0, 0, 0, 0.6)
+}
+
+.mt-8 {
+    margin-top: 8%;
 }
 
 /* Navbar */
@@ -184,7 +187,6 @@ footer i {
     background-image: url(https://res.cloudinary.com/cld2904/image/upload/v1663094062/paper-background_izc5wr.jpg);
     background-repeat: repeat;
     height: fit-content;
-    padding: 2%;
     text-align: center;
 }
 
@@ -195,13 +197,25 @@ footer i {
 }
 
 .carousel-outer {
-    width: 50%;
+    width: 80%;
 }
 
 .gallery-title {
     padding: 2%;
 }
 
-.gallery-title h2 {
-    color: #555b50;
+.carousel-item {
+    width: 100%;
+    height: 100%;
+}
+
+/* Testimonials */
+
+.blockquote-footer {
+    color: #f8be57;
+}
+
+.qmark {
+    color: #f8be57;
+    font-size: 1.8rem;
 }
