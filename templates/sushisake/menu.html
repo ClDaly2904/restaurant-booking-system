@@ -1,0 +1,92 @@
+{% extends "sushisake/base.html" %}
+
+{% block content %}
+
+<div class="home-background img-fluid">
+    <div class="container px-4 py-5 text-center">
+        <div class="transbox mt-8">
+            <h1 class="pb-2 border-bottom te">Menu</h1>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
+                <div class="col">
+                    <h4 class="menu-title">SHARERS</h4>
+                        <ul class="text-start">
+                            {% for sharer in sharers %}
+                            <li>
+                                <p><strong>{{ sharer.name }}</strong> <span> 
+                                    {% if sharer.dietaryinfo %}<span> <i>({{ sharer.dietaryinfo }})</i></span>{% endif %}
+                                    <br>
+                                    {{sharer.description}}, <span> £{{ sharer.price }}</span></p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                </div>
+                <div class="col">
+                    <h4 class="menu-title">PLATTERS</h4>
+                    <ul class="text-start">
+                        {% for platter in platters %}
+                        <li>
+                            <p><strong>{{ platter.name }}</strong> <span> 
+                                {% if platter.dietaryinfo %}<span> <i>({{ platter.dietaryinfo }})</i></span>{% endif %}
+                                <br>
+                                {{platter.description}}, <span> £{{ platter.price }}</span></p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
+                <div class="col">
+                    <h4 class="menu-title">SUSHI</h4>
+                        <ul class="text-start">
+                            {% for roll in sushi %}
+                            <li>
+                                <p><strong>{{ roll.name }}</strong> <span> 
+                                    {% if roll.dietaryinfo %}<span> <i>({{ roll.dietaryinfo }})</i></span>{% endif %}
+                                    <br>
+                                    {{roll.description}}, <span> £{{ roll.price }}</span></p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                </div>
+                <div class="col">
+                    <h4 class="menu-title">LARGE PLATES</h4>
+                    <ul class="text-start">
+                        {% for plate in largeplates %}
+                        <li>
+                            <p><strong>{{ plate.name }}</strong> 
+                                {% if plate.dietaryinfo %}<span> <i>({{ plate.dietaryinfo }})</i></span>{% endif %}
+                                <br>
+                                {{plate.description}}, <span> £{{ plate.price }}</span></p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
+                <div class="col">
+                    <h4 class="menu-title">DESSERTS</h4>
+                <ul class="text-center">
+                    {% for dessert in desserts %}
+                    <li>
+                        <p><strong>{{ dessert.name }}</strong>
+                            {% if dessert.dietaryinfo %}<span> <i>({{ dessert.dietaryinfo }})</i></span>{% endif %}
+                            <br>
+                            {{dessert.description}}, <span> £{{ dessert.price }}</span></p>
+                    </li>
+                    {% endfor %}
+                </ul>
+                </div>
+                <div class="col">
+                    <ul>
+                        <li>VG = Vegetarian</li>
+                        <li>GF = Gluten Free</li>
+                    </ul> 
+                </div>
+            </div>
+            <a aria-current="page" href="{% url 'BookTable' %}"><button class="btn-sign book-action cta">BOOK
+                    NOW</button></a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

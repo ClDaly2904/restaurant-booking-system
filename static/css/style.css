@@ -23,6 +23,11 @@ h4, body {
 a {
     color: #ef716b;
 }
+
+ul {
+    list-style: none;
+}
+
 .logo-divider {
     padding-top: 4%;
 }
@@ -139,7 +144,7 @@ footer i {
 }
 
 .cta {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     padding: 1%;
 }
 
@@ -218,4 +223,10 @@ footer i {
 .qmark {
     color: #f8be57;
     font-size: 1.8rem;
+}
+
+/* Menu Page */
+
+.menu-title {
+    color: #ef716b;
 }

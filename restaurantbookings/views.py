@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
-from django.views.generic import ListView, FormView
+from django.views.generic import ListView, FormView, View
 from restaurantbookings.booking_functions.availability import check_availability
-from .models import Table, Booking
+from .models import Table, Booking, FoodItem
 from .forms import AvailabilityForm
 
 
@@ -50,3 +50,23 @@ class BookingView(FormView):
 
 def get_homepage(request):
     return render(request, 'sushisake/index.html')
+
+
+class GetMenu(View):
+
+    def get(self, request):
+        sharers = FoodItem.objects.filter(category='SHARERS')
+        platters = FoodItem.objects.filter(category='PLATTERS')
+        sushi = FoodItem.objects.filter(category='SUSHI')
+        largeplates = FoodItem.objects.filter(category='LARGE PLATES')
+        desserts = FoodItem.objects.filter(category='DESSERTS')
+
+        context = {
+            'sharers': sharers,
+            'platters': platters,
+            'sushi': sushi,
+            'largeplates': largeplates,
+            'desserts': desserts
+        }
+
+        return render(request, 'sushisake/menu.html', context)
