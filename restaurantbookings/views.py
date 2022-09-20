@@ -1,8 +1,9 @@
 from django.shortcuts import render, HttpResponse
 from django.views.generic import ListView, FormView, View
+from django.contrib import messages
 from restaurantbookings.booking_functions.availability import check_availability
 from .models import Table, Booking, FoodItem
-from .forms import AvailabilityForm
+from .forms import AvailabilityForm, ContactForm
 
 
 # Create your views here.
@@ -70,3 +71,13 @@ class GetMenu(View):
         }
 
         return render(request, 'sushisake/menu.html', context)
+
+
+class ContactView(FormView):
+    form_class = ContactForm
+    template_name = 'sushisake/contact.html'
+
+    def form_valid(self, form):
+        if contact_form.is_valid():
+            messages.success(request, 'Message successfully sent.')
+

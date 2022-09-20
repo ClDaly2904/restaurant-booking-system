@@ -230,3 +230,25 @@ footer i {
 .menu-title {
     color: #ef716b;
 }
+
+/* Contact Page */
+
+.contact-background {
+    background-image: url(https://res.cloudinary.com/cld2904/image/upload/v1661793691/koi-carp-g16760f884_1280_co4fty.png);
+    background-repeat: repeat;
+    height: fit-content;
+}
+
+.mapouter {
+    width: 100%;
+    height: fit-content;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none!important;
+}
+
+#gmap_canvas {
+    width: 80%;
+}

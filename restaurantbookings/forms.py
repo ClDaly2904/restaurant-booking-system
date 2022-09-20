@@ -14,3 +14,11 @@ class AvailabilityForm(forms.Form):
     booking_date_time_end = forms.DateTimeField(required=True,
                                                 input_formats=['%d/%m/%YT%H:%M', ],
                                                 widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
+
+
+class ContactForm(forms.Form):
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    contact_number = forms.IntegerField(required=True)
+    email = forms.EmailField(required=True)
+    message = forms.CharField(widget=forms.TextInput(attrs={'size': '40'}))
