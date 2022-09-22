@@ -45,3 +45,18 @@ class FoodItem(models.Model):
 
     def __str__(self):
         return f'{self.name}: {self.price}, {self.dietaryinfo}'
+
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=30)
+    contact_number = models.IntegerField()
+    email_address = models.EmailField(max_length=30)
+    message = models.TextField(max_length=400)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_on"]
+
+    def __str__(self):
+        return self.first_name, self.last_name, self.created_on

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import ListView, FormView, View
 from django.contrib import messages
 from restaurantbookings.booking_functions.availability import check_availability
@@ -77,7 +77,10 @@ class ContactView(FormView):
     form_class = ContactForm
     template_name = 'sushisake/contact.html'
 
-    def form_valid(self, form):
-        if contact_form.is_valid():
-            messages.success(request, 'Message successfully sent.')
-
+    def post(self, request):
+        """ """
+        form = ContactForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+        messages.success(request, 'Your message has been successfully sent!')
+        return redirect('/')

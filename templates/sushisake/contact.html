@@ -33,7 +33,7 @@
                 <p class="text-center mb-4">To book a table with us, please book online <a href="{% url 'BookTable' %}">here</a>.</p>
                 <h4 class="border-top menu-title text-center px-4 py-5">Alternatively, please use the form below to
                     leave us a message!</h4>
-                <form action="https://formdump.codeinstitute.net/" method="POST" class="needs-validation">
+                <form method="POST" class="needs-validation">
                     {{ form.as_p }}
                     {% csrf_token %}
                     <div class="text-center">
