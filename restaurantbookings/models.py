@@ -37,6 +37,7 @@ class FoodItem(models.Model):
         ('LARGE PLATES', 'large plates'),
         ('DESSERTS', 'desserts'),
     )
+
     category = models.CharField(max_length=12, choices=categories)
     name = models.CharField(max_length=20)
     dietaryinfo = models.CharField(max_length=20, blank=True)

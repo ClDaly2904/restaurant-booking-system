@@ -3,19 +3,39 @@ from django.forms import ModelForm
 from .models import Contact
 
 
-class AvailabilityForm(forms.Form):
+class AvailabilityForm(ModelForm):
     TABLE_LOCATION = (
         ('IN', 'INSIDE SEATING'),
         ('OUT', 'OUTSIDE SEATING')
     )
-    table_location = forms.ChoiceField(choices=TABLE_LOCATION, required=True)
-    people = forms.IntegerField(required=True)
-    booking_date_time_start = forms.DateTimeField(required=True,
-                                                  input_formats=['%d/%m/%YT%H:%M', ],
-                                                  widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
-    booking_date_time_end = forms.DateTimeField(required=True,
-                                                input_formats=['%d/%m/%YT%H:%M', ],
-                                                widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
+
+    table_location = forms.ChoiceField(
+        choices=TABLE_LOCATION,
+        required=True
+    )
+
+    people = forms.IntegerField(
+        label='Number of people',
+        required=True,
+        widget=forms.NumberInput({'placeholder': 'Number of people'})
+    )
+
+    booking_date_time_start = forms.DateTimeField(
+        required=True,
+        input_formats=['%d/%m/%YT%H:%M', ],
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
+    )
+
+    booking_date_time_end = forms.DateTimeField(
+        required=True,
+        input_formats=['%d/%m/%YT%H:%M', ],
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
+    )
+
+    class Meta:
+        """ """
+        model = Contact
+        fields = ('table_location', 'people', 'booking_date_time_start', 'booking_date_time_end')
 
 
 class ContactForm(ModelForm):
@@ -52,8 +72,4 @@ class ContactForm(ModelForm):
     class Meta:
         """ """
         model = Contact
-        # Tell the form to use all the fields provided
         fields = ('first_name', 'last_name', 'email_address', 'contact_number', 'message')
-
-        class Meta:
-            fields = '__all__'

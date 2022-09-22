@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect, reverse
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, FormView, View
 from django.contrib import messages
 from restaurantbookings.booking_functions.availability import check_availability
@@ -44,13 +45,18 @@ class BookingView(FormView):
                 booking_date_time_end=data['booking_date_time_end']
             )
             booking.save()
-            return HttpResponse(booking)
+            messages.success(self.request, 'Your booking has been successful! \n'
+                                        f'Your table has been booked from {booking.booking_date_time_start}\n'
+                                        f' to {booking.booking_date_time_end}')
+            return HttpResponseRedirect(reverse('sushisake'))
         else:
-            return HttpResponse('This table type is fully booked')
+            messages.error(self.request, 'Sorry, the table type for this time is full, please try again. ')
+            return HttpResponseRedirect(reverse('BookingList'))
 
 
-def get_homepage(request):
-    return render(request, 'sushisake/index.html')
+class get_homepage(View):
+    def get(self, request):
+        return render(request, 'sushisake/index.html')
 
 
 class GetMenu(View):

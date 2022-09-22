@@ -161,6 +161,7 @@ footer i {
     background-image: url(https://res.cloudinary.com/cld2904/image/upload/v1661793691/koi-carp-g16760f884_1280_co4fty.png);
     background-repeat: repeat;
     height: fit-content;
+    background-attachment: fixed;
 }
 
 .home-jumbotron {
@@ -172,6 +173,7 @@ footer i {
     justify-content: center;
     align-items: center;
     padding-bottom: 40px;
+    background-attachment: fixed;
 }
 
 #jumbotron-title h1 {
@@ -195,6 +197,7 @@ footer i {
     background-repeat: repeat;
     height: fit-content;
     text-align: center;
+    background-attachment: fixed;
 }
 
 .carousel-container {
@@ -264,5 +267,4 @@ footer i {
     background-color: #f8be57;
     z-index: 3;
     position: absolute;
-    left: 40%;
 }
