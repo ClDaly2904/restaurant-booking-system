@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, FormView, View
 from django.contrib import messages
@@ -51,7 +51,7 @@ class BookingView(FormView):
             return HttpResponseRedirect(reverse('sushisake'))
         else:
             messages.error(self.request, 'Sorry, the table type for this time is full, please try again. ')
-            return HttpResponseRedirect(reverse('BookingList'))
+            return HttpResponseRedirect(reverse('BookingTable'))
 
 
 class get_homepage(View):
@@ -90,3 +90,12 @@ class ContactView(FormView):
             form.save()
         messages.success(request, 'Your message has been successfully sent!')
         return redirect('/')
+
+
+class UserBookings(View):
+    def get(self, request):
+        bookings = Booking.objects.filter(guest=request.user)
+        context = {
+            'bookings': bookings
+        }
+        return render(request, 'sushisake/user_bookings.html', context)

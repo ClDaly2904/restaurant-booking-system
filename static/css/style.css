@@ -133,7 +133,8 @@ footer i {
 .account-background {
     background-image: url(https://res.cloudinary.com/cld2904/image/upload/v1661793691/koi-carp-g16760f884_1280_co4fty.png);
     background-repeat: repeat;
-    height: 100vh;
+    min-height: 100vh;
+    max-height: fit-content;
 }
 
 
@@ -267,4 +268,10 @@ footer i {
     background-color: #f8be57;
     z-index: 3;
     position: absolute;
+}
+
+/* Booking pages */
+
+.booking-card {
+    border: 2px solid #ef716b;
 }
