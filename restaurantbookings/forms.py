@@ -32,6 +32,12 @@ class AvailabilityForm(ModelForm):
         widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
     )
 
+    additional_info = forms.CharField(
+        label='Additional Info',
+        required=True,
+        widget=forms.Textarea(attrs={'placeholder': 'Please enter any additional information (max 400 characters)', 'rows': 2})
+    )
+
     class Meta:
         """ """
         model = Contact
