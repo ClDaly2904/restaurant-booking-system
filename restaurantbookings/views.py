@@ -20,7 +20,7 @@ class BookingList(ListView):
 
 class BookingView(FormView):
     form_class = AvailabilityForm
-    template_name = 'availability_form.html'
+    template_name = 'sushisake/availability_form.html'
 
     def form_valid(self, form):
         data = form.cleaned_data
@@ -99,3 +99,38 @@ class UserBookings(View):
             'bookings': bookings
         }
         return render(request, 'sushisake/user_bookings.html', context)
+
+
+class EditBooking(View):
+    def get(self, request, booking_id):
+        queryset = Booking.objects.filter(guest=request.user)
+        booking = get_object_or_404(queryset, id=booking_id)
+
+        return render(
+            request,
+            "sushisake/edit_booking.html",
+            {
+                'form': AvailabilityForm()
+                },
+                )
+
+    def post(self, request, booking_id):
+
+        queryset = Booking.objects.filter(guest=request.user)
+        booking = get_object_or_404(queryset, id=booking_id)
+
+        form = AvailabilityForm(data=request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your booking has been updated')
+            return redirect('mybookings')
+        else:
+            form = AvailabilityForm(instance=booking)
+
+        return render(
+            request,
+            "sushisake/edit_booking.html",
+            {
+                'form': form
+            },
+        )
