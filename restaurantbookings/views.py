@@ -110,7 +110,7 @@ class EditBooking(View):
             request,
             "sushisake/edit_booking.html",
             {
-                'form': AvailabilityForm()
+                'form': AvailabilityForm(instance=booking)
                 },
                 )
 
