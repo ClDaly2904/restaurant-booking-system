@@ -134,3 +134,10 @@ class EditBooking(View):
                 'form': form
             },
         )
+
+
+def delete_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    booking.delete()
+    messages.success(request, 'Your booking has been cancelled!')
+    return redirect('mybookings')
