@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<div class="account-background img-fluid">
+<div class="home-background img-fluid">
     <div class="container px-4 py-5 text-center">
         <div class="transbox mt-8">
             <h1>Admin Dashboard</h1>
             <h4 class="mt-4 mb-4">Guest Bookings:</h4>
             {% if bookings %}
             {% for booking in bookings %}
-            <div class="booking-card">
+            <div class="booking-card mt-4 py-4">
                 <div class="row row-cols-lg-2">
                     <div class="col">
                         <p>Guest name: {{ booking.guest }}</p>
@@ -37,7 +37,27 @@
             {% else %}
             <p>Currently no bookings for Sushi & Sake!</p>
             {% endif %}
-
+            <h4 class="mt-4 mb-4">Messages:</h4>
+            {% if contactmessages %}
+            {% for contactmessage in contactmessages %}
+            <div class="booking-card mt-4 py-4">
+                <div class="row row-cols-lg-2">
+                    <div class="col">
+                        <p>From: {{ contactmessage.first_name }} {{ contactmessage.last_name }}</p>
+                    </div>
+                    <div class="col">
+                        <p>Contact number: {{ contactmessage.contact_number }}</p>
+                        <p>Email address: {{ contactmessage.email_address }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <p>Message content: {{ contactmessage.message }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>Currently no bookings for Sushi & Sake!</p>
+            {% endif %}
         </div>
     </div>
 </div>

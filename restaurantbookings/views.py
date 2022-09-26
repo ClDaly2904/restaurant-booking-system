@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import ListView, FormView, View
 from django.contrib import messages
 from restaurantbookings.booking_functions.availability import check_availability
-from .models import Table, Booking, FoodItem
+from .models import Table, Booking, FoodItem, Contact
 from .forms import AvailabilityForm, ContactForm
 
 
@@ -138,6 +138,7 @@ class EditBooking(View):
             },
         )
 
+
 class ConfirmDelete(View):
     def get(self, request, booking_id):
         queryset = Booking.objects.filter(guest=request.user)
@@ -166,7 +167,9 @@ class ConfirmDelete(View):
 class AdminDashboard(View):
     def get(self, request):
         bookings = Booking.objects.all()
+        contactmessages = Contact.objects.all()
         context = {
-            'bookings': bookings
+            'bookings': bookings,
+            'contactmessages': contactmessages
         }
         return render(request, 'sushisake/admin_dashboard.html', context)
