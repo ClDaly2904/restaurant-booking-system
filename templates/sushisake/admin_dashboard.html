@@ -1,0 +1,45 @@
+{% extends "sushisake/base.html" %}
+
+{% block content %}
+
+<div class="account-background img-fluid">
+    <div class="container px-4 py-5 text-center">
+        <div class="transbox mt-8">
+            <h1>Admin Dashboard</h1>
+            <h4 class="mt-4 mb-4">Guest Bookings:</h4>
+            {% if bookings %}
+            {% for booking in bookings %}
+            <div class="booking-card">
+                <div class="row row-cols-lg-2">
+                    <div class="col">
+                        <p>Guest name: {{ booking.guest }}</p>
+                    </div>
+                    <div class="col">
+                        <p>Booking id: {{ booking.id }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <p>Table number {{ booking.table.number }} from {{ booking.booking_date_time_start }} until
+                        {{ booking.booking_date_time_end }}</p>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <a class="nav-link" aria-current="page" href="{% url 'editbooking' booking.id %}">Edit booking</a>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <a class="nav-link" aria-current="page" href="{% url 'confirmdelete' booking.id %}">Cancel booking</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>Currently no bookings for Sushi & Sake!</p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

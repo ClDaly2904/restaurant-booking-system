@@ -155,6 +155,11 @@ footer i {
     color: white;
 }
 
+#cancelbtn {
+    background-color: #ef716b;
+}
+
+
 /* Home Page */
 
 /* Header */ 
@@ -274,4 +279,8 @@ footer i {
 
 .booking-card {
     border: 2px solid #ef716b;
+}
+
+.booking-card a {
+    color: #f8be57;
 }

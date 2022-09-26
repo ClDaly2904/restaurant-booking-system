@@ -123,7 +123,10 @@ class EditBooking(View):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your booking has been updated')
-            return redirect('mybookings')
+            if request.user.is_superuser:
+                return redirect('admin_dashboard')
+            else:
+                return redirect('mybookings')
         else:
             form = AvailabilityForm(instance=booking)
 
@@ -135,9 +138,35 @@ class EditBooking(View):
             },
         )
 
+class ConfirmDelete(View):
+    def get(self, request, booking_id):
+        queryset = Booking.objects.filter(guest=request.user)
+        booking = get_object_or_404(queryset, id=booking_id)
 
-def delete_booking(request, booking_id):
-    booking = get_object_or_404(Booking, id=booking_id)
-    booking.delete()
-    messages.success(request, 'Your booking has been cancelled!')
-    return redirect('mybookings')
+        return render(
+            request,
+            "sushisake/confirm_delete.html")
+
+    def post(self, request, booking_id):
+        booking = get_object_or_404(Booking, id=booking_id)
+
+        if request.method == "POST":
+            booking.delete()
+            messages.success(request, 'Your booking has been cancelled!')
+            if request.user.is_superuser:
+                return redirect('admin_dashboard')
+            else:
+                return redirect('mybookings')
+
+        return render(
+            request,
+            "sushisake/confirm_delete.html")
+
+
+class AdminDashboard(View):
+    def get(self, request):
+        bookings = Booking.objects.all()
+        context = {
+            'bookings': bookings
+        }
+        return render(request, 'sushisake/admin_dashboard.html', context)

@@ -50,10 +50,19 @@
                         <a class="nav-link" aria-current="page" href="{% url 'contact' %}">CONTACT</a>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link d-inline-block" href="{% url 'account_logout' %}">Logout</a>
-                        <a class="nav-link d-inline-block" href="{% url 'mybookings' %}">My Bookings</a>
-                    </li>
+                        {% if user.is_superuser %}
+                            <li class="nav-item">
+                                <a class="nav-link d-inline-block" href="{% url 'admin_dashboard' %}">ADMIN DASHBOARD</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link d-inline-block" href="{% url 'account_logout' %}">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link d-inline-block" href="{% url 'account_logout' %}">Logout</a>
+                                <a class="nav-link d-inline-block" href="{% url 'mybookings' %}">My Bookings</a>
+                            </li>
+                        {% endif %}
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link d-inline-block" href="{% url 'account_signup' %}">Register</a>/
