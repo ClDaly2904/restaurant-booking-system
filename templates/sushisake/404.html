@@ -1,0 +1,15 @@
+{% extends "sushisake/base.html" %}
+
+{% block content %}
+
+<div class="home-background img-fluid">
+    <div class="container px-4 py-5 text-center">
+        <div class="transbox mt-8">
+            <h1 class="pb-2 border-bottom te">Error 404</h1>
+            <p>The page you are looking for could not be found!</p>
+            <p>Please click <a href="{% url for 'sushisake' %}">here</a> to return to our homepage.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

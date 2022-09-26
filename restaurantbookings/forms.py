@@ -34,7 +34,7 @@ class AvailabilityForm(ModelForm):
 
     additional_info = forms.CharField(
         label='Additional Info',
-        required=True,
+        required=False,
         widget=forms.Textarea(attrs={'placeholder': 'Please enter any additional information (max 400 characters)', 'rows': 2})
     )
 

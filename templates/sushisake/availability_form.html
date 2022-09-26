@@ -8,6 +8,9 @@
             <div class="col-md-8 mt-8 offset-md-2 transbox">
                 <h1 class="border-bottom">Book a Table</h1>
                 {% if user.is_authenticated %}
+                    <div class="warning">
+                        <p>For bookings over 8 people, please <a href="{% url 'contact' %}">contact us</a>.</p>
+                    </div>
                     <form method="POST" class="mt-4">
                         {{ form.as_p }}
                         {% csrf_token %}
