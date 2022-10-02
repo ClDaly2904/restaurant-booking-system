@@ -8,7 +8,10 @@
             <div class="col-md-8 mt-8 offset-md-2 transbox">
                 <h1 class="border-bottom">Book a Table</h1>
                 {% if user.is_authenticated %}
-                    <div class="warning">
+                    <div class="bk-warning text-center py-2">
+                        <h4 class="menu-title">Please read before booking</h4>
+                        <p>Opening times: 10:00-23:00</p>
+                        <p>Please note that maximum slot time is 2 hours.</p>
                         <p>For bookings over 8 people, please <a href="{% url 'contact' %}">contact us</a>.</p>
                     </div>
                     <form method="POST" class="mt-4">

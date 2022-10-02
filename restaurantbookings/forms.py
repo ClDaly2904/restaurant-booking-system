@@ -1,3 +1,5 @@
+import pytz
+from dateutil import parser
 from django import forms
 from django.forms import ModelForm
 from django.utils import timezone
@@ -37,6 +39,16 @@ class AvailabilityForm(ModelForm):
         if data < now:
             raise ValidationError(_('Invalid date/time - please select a date and time in the future.'))
 
+        # check that end time is within opening times
+        # get time from datetime obj
+        time = data.time()
+        # get hour from time
+        start_hour = time.hour
+
+        # raise validation error if hour is bigger than or equal to closing
+        if start_hour <10:
+            raise ValidationError(_('Invalid start time- restaurant opens at 10:00.'))
+
         # Return the cleaned data.
         return data
 
@@ -49,7 +61,12 @@ class AvailabilityForm(ModelForm):
     def clean_booking_date_time_end(self):
         data = self.cleaned_data['booking_date_time_end']
         now = timezone.now()
-        start_time = self.cleaned_data['booking_date_time_start']
+        start_time_input = self.data['booking_date_time_start']
+        # convert to datetime obj
+        start_time_ntz = parser.parse(start_time_input)
+        # add timezone
+        t_z = pytz.timezone("UTC")
+        start_time = t_z.localize(start_time_ntz)
 
         # Check if a date is not in the past.
         if data < now:
@@ -67,8 +84,19 @@ class AvailabilityForm(ModelForm):
         # multiply to convert time to hours
         thrs = tsecs/(60*60)
 
+        # raise validation error is difference is greater than 2 hours
         if thrs > 2:
             raise ValidationError(_('Invalid end time- maximum slot time is 2 hours.'))
+
+        # check that end time is within opening times
+        # get time from datetime obj
+        time = data.time()
+        # get hour from time
+        end_hour = time.hour
+
+        # raise validation error if hour is bigger than or equal to closing
+        if end_hour >= 23:
+            raise ValidationError(_('Invalid end time- restaurant closes at 23:00.'))
 
         # Return the cleaned data.
         return data
@@ -78,17 +106,6 @@ class AvailabilityForm(ModelForm):
         required=False,
         widget=forms.Textarea(attrs={'placeholder': 'Please enter any additional information (max 400 characters)', 'rows': 2})
     )
-
-    def clean_booking_date_times(self):
-        booking_start = self.cleaned_data['booking_date_time_start']
-        booking_end = self.cleaned_data['booking_date_time_end']
-
-        # Check if a date is not in the past.
-        if booking_start < booking_end:
-            raise ValidationError(_('Invalid date/time - please make sure booking time end is after booking time start.'))
-
-        # Return the cleaned data.
-        return booking_start, booking_end
 
     class Meta:
         """ """
