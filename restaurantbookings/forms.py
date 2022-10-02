@@ -1,5 +1,10 @@
+import datetime
+import pytz
 from django import forms
 from django.forms import ModelForm
+from django.utils import timezone
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 from .models import Contact
 
 
@@ -26,11 +31,33 @@ class AvailabilityForm(ModelForm):
         widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
     )
 
+    def clean_booking_date_time_start(self):
+        data = self.cleaned_data['booking_date_time_start']
+        now = timezone.now()
+
+        # Check if a date is not in the past.
+        if data < now:
+            raise ValidationError(_('Invalid date/time - please select a date and time in the future.'))
+
+        # Return the cleaned data.
+        return data
+
     booking_date_time_end = forms.DateTimeField(
         required=True,
         input_formats=['%d/%m/%YT%H:%M', ],
         widget=forms.DateTimeInput(attrs={'type': 'datetime-local'})
     )
+
+    def clean_booking_date_time_end(self):
+        data = self.cleaned_data['booking_date_time_end']
+        now = timezone.now()
+
+        # Check if a date is not in the past.
+        if data < now:
+            raise ValidationError(_('Invalid date/time - please select a date and time in the future.'))
+
+        # Return the cleaned data.
+        return data
 
     additional_info = forms.CharField(
         label='Additional Info',
