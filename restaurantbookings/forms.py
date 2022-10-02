@@ -1,5 +1,3 @@
-import datetime
-import pytz
 from django import forms
 from django.forms import ModelForm
 from django.utils import timezone
@@ -51,10 +49,26 @@ class AvailabilityForm(ModelForm):
     def clean_booking_date_time_end(self):
         data = self.cleaned_data['booking_date_time_end']
         now = timezone.now()
+        start_time = self.cleaned_data['booking_date_time_start']
 
         # Check if a date is not in the past.
         if data < now:
             raise ValidationError(_('Invalid date/time - please select a date and time in the future.'))
+
+        # check that date time end is after date time start
+        if data < start_time:
+            raise ValidationError(_('Invalid date/time - please make sure that booking end time is after booking start time.'))
+
+        # check that slot is not longer than 2 hours
+        # find differentce between start time and end time
+        time_diff = data - start_time
+        # find time in seconds
+        tsecs = time_diff.total_seconds()
+        # multiply to convert time to hours
+        thrs = tsecs/(60*60)
+
+        if thrs > 2:
+            raise ValidationError(_('Invalid end time- maximum slot time is 2 hours.'))
 
         # Return the cleaned data.
         return data
@@ -64,6 +78,17 @@ class AvailabilityForm(ModelForm):
         required=False,
         widget=forms.Textarea(attrs={'placeholder': 'Please enter any additional information (max 400 characters)', 'rows': 2})
     )
+
+    def clean_booking_date_times(self):
+        booking_start = self.cleaned_data['booking_date_time_start']
+        booking_end = self.cleaned_data['booking_date_time_end']
+
+        # Check if a date is not in the past.
+        if booking_start < booking_end:
+            raise ValidationError(_('Invalid date/time - please make sure booking time end is after booking time start.'))
+
+        # Return the cleaned data.
+        return booking_start, booking_end
 
     class Meta:
         """ """
