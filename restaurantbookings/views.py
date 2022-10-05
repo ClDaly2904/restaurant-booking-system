@@ -51,7 +51,7 @@ class BookingView(FormView):
             return HttpResponseRedirect(reverse('sushisake'))
         else:
             messages.error(self.request, 'Sorry, the table type for this time is full, please try again. ')
-            return HttpResponseRedirect(reverse('BookingTable'))
+            return HttpResponseRedirect(reverse('BookTable'))
 
 
 class get_homepage(View):

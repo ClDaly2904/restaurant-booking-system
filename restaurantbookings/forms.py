@@ -25,6 +25,20 @@ class AvailabilityForm(ModelForm):
         widget=forms.NumberInput({'placeholder': 'Number of people'})
     )
 
+    def clean_people(self):
+        data = self.cleaned_data['people']
+
+        # Check only one number input
+        if data > 8:
+            raise ValidationError(_('Invalid number of people - please enter a number between 1 and 8'))
+
+        # Check user has not entered 0
+        if data <= 0:
+            raise ValidationError(_('Invalid number of people - please enter a number between 1 and 8'))
+
+        # Return the cleaned data
+        return data
+
     booking_date_time_start = forms.DateTimeField(
         required=True,
         input_formats=['%d/%m/%YT%H:%M', ],
