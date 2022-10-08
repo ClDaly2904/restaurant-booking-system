@@ -5,7 +5,7 @@ from django.forms import ModelForm
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from .models import Contact
+from .models import Contact, Booking
 
 
 class AvailabilityForm(ModelForm):
@@ -60,7 +60,7 @@ class AvailabilityForm(ModelForm):
         start_hour = time.hour
 
         # raise validation error if hour is bigger than or equal to closing
-        if start_hour <10:
+        if start_hour < 10:
             raise ValidationError(_('Invalid start time- restaurant opens at 10:00.'))
 
         # Return the cleaned data.
@@ -123,7 +123,7 @@ class AvailabilityForm(ModelForm):
 
     class Meta:
         """ """
-        model = Contact
+        model = Booking
         fields = ('table_location', 'people', 'booking_date_time_start', 'booking_date_time_end')
 
 
@@ -134,17 +134,42 @@ class ContactForm(ModelForm):
         widget=forms.TextInput(attrs={'placeholder': 'First Name'}),
     )
 
+    def clean_first_name(self):
+        data = self.cleaned_data['first_name']
+
+        if not data.isalpha():
+            raise ValidationError(_('Please only enter letters'))
+
+        return data
+
     last_name = forms.CharField(
         label='Last Name',
         required=True,
         widget=forms.TextInput(attrs={'placeholder': 'Last Name'}),
     )
 
+    def clean_last_name(self):
+        data = self.cleaned_data['last_name']
+
+        if not data.isalpha():
+            raise ValidationError(_('Please only enter letters'))
+
+        return data
+
     contact_number = forms.IntegerField(
         label='Contact Number',
         required=True,
         widget=forms.NumberInput(attrs={'placeholder': 'Contact Number'}),
     )
+
+    def clean_contact_number(self):
+        data = self.cleaned_data['contact_number']
+
+        # convert data to string and check length is phone number
+        if not 11 >= len(str(data)) >= 12:
+            raise ValidationError(_('Please enter a valid phone number'))
+
+        return data
 
     email_address = forms.EmailField(
         label='Email Address',
@@ -157,6 +182,18 @@ class ContactForm(ModelForm):
         required=True,
         widget=forms.Textarea(attrs={'placeholder': 'Please enter your message (max 400 characters)', 'rows': 3})
     )
+
+    def clean_message(self):
+        data = self.cleaned_data['message']
+
+        # check to see that message isn't just spaces
+        if data.isspace():
+            raise ValidationError(_('Please enter a message'))
+
+        if len(data) < 10:
+            raise ValidationError(_('Minimum value 10 characters'))
+
+        return data
 
     class Meta:
         """ """

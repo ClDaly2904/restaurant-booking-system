@@ -83,13 +83,19 @@ class ContactView(FormView):
     form_class = ContactForm
     template_name = 'sushisake/contact.html'
 
-    def post(self, request):
+    def form_valid(self, form):
         """ """
-        form = ContactForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-        messages.success(request, 'Your message has been successfully sent!')
-        return redirect('/')
+        data = form.cleaned_data
+        contact = Contact.objects.create(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            contact_number=data['contact_number'],
+            email_address=data['email_address'],
+            message=data['message']
+        )
+        contact.save()
+        messages.success(self.request, 'Your message has been sent!')
+        return HttpResponseRedirect(reverse('contact'))
 
 
 class UserBookings(View):

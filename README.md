@@ -16,6 +16,7 @@
 ### General
 - Django documentation https://docs.djangoproject.com/en/4.1/
 - Python3 documentation https://docs.python.org/3/
+- W3 Schools https://www.w3schools.com/python/
 
 ### Inspiration
 For the design on Sushi & Sake's website, I took inspiration from other Japanese restaurants. One of my favourite local restaurants, Kibou https://kibou.co.uk/ not only has delicious food but also a visually stunning website that helped me cultivate the feel of the Sushi & Sake website. I also browsed the Yo! Sushi website https://yosushi.com/ for menu ideas.

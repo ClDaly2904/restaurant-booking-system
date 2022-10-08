@@ -44,6 +44,11 @@ ul {
     margin-top: 8%;
 }
 
+.errorlist li {
+    text-transform: uppercase;
+    color: #ef716b;
+}
+
 
 /* Navbar */
 

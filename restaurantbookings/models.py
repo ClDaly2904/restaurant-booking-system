@@ -52,7 +52,7 @@ class FoodItem(models.Model):
 class Contact(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=30)
-    contact_number = models.IntegerField()
+    contact_number = models.BigIntegerField()
     email_address = models.EmailField(max_length=30)
     message = models.TextField(max_length=400)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -61,4 +61,4 @@ class Contact(models.Model):
         ordering = ["-created_on"]
 
     def __str__(self):
-        return self.first_name, self.last_name, self.created_on
+        return f'{self.first_name}, {self.last_name}, {self.created_on}'
