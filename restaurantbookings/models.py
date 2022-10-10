@@ -25,6 +25,9 @@ class Booking(models.Model):
     guest = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     additional_info = models.CharField(max_length=200, blank=True)
 
+    class Meta:
+        ordering = ['booking_date_time_start']
+
     def __str__(self):
         return f'{self.guest} has booked a table for {self.people} people for {self.booking_date_time_start} until {self.booking_date_time_end}'
 

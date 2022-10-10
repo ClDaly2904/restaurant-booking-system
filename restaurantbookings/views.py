@@ -24,16 +24,14 @@ class BookingView(FormView):
 
     def form_valid(self, form):
         data = form.cleaned_data
-        table_list = Table.objects.filter(location=data['table_location'])
-
+        tables = Table.objects.all()
         available_tables = []
-        people = data['people']
 
-        for table in table_list:
-            if check_availability(table, data['booking_date_time_start'], data['booking_date_time_end']):
-                # check table is big enough for number of people
-                if table.no_seats >= people:
-                    available_tables.append(table)
+        location_list = Table.objects.filter(location=data['table_location'])
+        check_tables = check_availability(data['booking_date_time_start'], data['booking_date_time_end'], data['people'])
+        for table in tables:
+            if table in location_list and table in check_tables:
+                available_tables.append(table)
 
         if len(available_tables) > 0:
             table = available_tables[0]

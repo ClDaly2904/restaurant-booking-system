@@ -11,7 +11,7 @@
             {% for booking in bookings %}
             <div class="booking-card mt-4 py-4">
                 <div class="row row-cols-lg-2">
-                    <div class="col">
+                    <div class="col guest-name">
                         <p>Guest name: {{ booking.guest }}</p>
                     </div>
                     <div class="col">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <p>Table({{ booking.table.location }}) from {{ booking.booking_date_time_start }} until
+                    <p>Table number {{ booking.table.number }}({{ booking.table.location }}), for {{ booking.people }} from {{ booking.booking_date_time_start }} until
                         {{ booking.booking_date_time_end }}</p>
                 </div>
                 <div class="row mt-2">
