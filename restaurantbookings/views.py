@@ -109,8 +109,8 @@ class UserBookings(View):
 
 class EditBooking(View):
     def get(self, request, booking_id):
-        queryset = Booking.objects.filter(guest=request.user)
-        booking = get_object_or_404(queryset, id=booking_id)
+        queryset = Booking.objects.filter(id=booking_id)
+        booking = get_object_or_404(queryset)
 
         return render(
             request,
@@ -122,8 +122,8 @@ class EditBooking(View):
 
     def post(self, request, booking_id):
 
-        queryset = Booking.objects.filter(guest=request.user)
-        booking = get_object_or_404(queryset, id=booking_id)
+        queryset = Booking.objects.filter(id=booking_id)
+        booking = get_object_or_404(queryset)
 
         form = AvailabilityForm(data=request.POST, instance=booking)
         if form.is_valid():
@@ -147,8 +147,8 @@ class EditBooking(View):
 
 class ConfirmDelete(View):
     def get(self, request, booking_id):
-        queryset = Booking.objects.filter(guest=request.user)
-        booking = get_object_or_404(queryset, id=booking_id)
+        queryset = Booking.objects.filter(id=booking_id)
+        booking = get_object_or_404(queryset)
 
         return render(
             request,
