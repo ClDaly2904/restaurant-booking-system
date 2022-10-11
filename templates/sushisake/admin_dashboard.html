@@ -5,66 +5,81 @@
 <div class="home-background img-fluid">
     <div class="container px-4 py-5 text-center">
         <div class="transbox mt-8">
+            <!-- Link to jump to Messages -->
             <h1 id="PG_TOP">Admin Dashboard</h1>
             <div>
                 <a href="#messages">Jump to messages</a>
             </div>
-            <h4 class="mt-4 mb-4">Guest Bookings:</h4>
-            {% if bookings %}
-            {% for booking in bookings %}
-            <div class="booking-card mt-4 py-4">
-                <div class="row row-cols-lg-2">
-                    <div class="col guest-name">
-                        <p>Guest name: {{ booking.guest }}</p>
+            <!-- List of all Bookings -->
+            <section>
+                <h4 class="mt-4 mb-4">Guest Bookings:</h4>
+                {% if bookings %}
+                {% for booking in bookings %}
+                <div class="booking-card mt-4 py-4">
+                    <div class="row row-cols-lg-2">
+                        <div class="col guest-name">
+                            <p>Guest name: {{ booking.guest }}</p>
+                        </div>
+                        <div class="col">
+                            <p>Booking id: {{ booking.id }}</p>
+                        </div>
                     </div>
-                    <div class="col">
-                        <p>Booking id: {{ booking.id }}</p>
+                    <div class="row">
+                        <p>Table number {{ booking.table.number }}({{ booking.table.location }}), for
+                            {{ booking.people }} from {{ booking.booking_date_time_start }} until
+                            {{ booking.booking_date_time_end }}</p>
                     </div>
-                </div>
-                <div class="row">
-                    <p>Table number {{ booking.table.number }}({{ booking.table.location }}), for {{ booking.people }} from {{ booking.booking_date_time_start }} until
-                        {{ booking.booking_date_time_end }}</p>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-6">
-                        <a class="nav-link" aria-current="page" href="{% url 'editbooking' booking.id %}">Edit booking</a>
-                    </div>
-                    <div class="col-md-6">
-                        <a class="nav-link" aria-current="page" href="{% url 'confirmdelete' booking.id %}">Cancel/clear booking</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            {% else %}
-            <p>Currently no bookings for Sushi & Sake!</p>
-            {% endif %}
-            <img class="sushi-branding" src="https://res.cloudinary.com/cld2904/image/upload/v1661797330/sslarge-backgroudremove_qukkue.png">
-            <h4 class="mt-8 mb-4" id="messages">Messages:</h4>
-            {% if contacts %}
-            {% for contact in contacts %}
-            <div class="booking-card mt-4 py-4">
-                <div class="row row-cols-lg-2">
-                    <div class="col">
-                        <p>From: {{ contact.first_name }} {{ contact.last_name }}</p>
-                    </div>
-                    <div class="col">
-                        <p>Contact number: {{ contact.contact_number }}</p>
-                        <p>Email address: {{ contact.email_address }}</p>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <a class="nav-link" aria-current="page" href="{% url 'editbooking' booking.id %}">Edit
+                                booking</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="nav-link" aria-current="page"
+                                href="{% url 'confirmdelete' booking.id %}">Cancel/clear booking</a>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <p>Message content: {{ contact.message }}</p>
+                {% endfor %}
+                {% else %}
+                <p>Currently no bookings for Sushi & Sake!</p>
+                {% endif %}
+            </section>
+            <!-- List of all messages -->
+            <section>
+                <img class="sushi-branding"
+                    src="https://res.cloudinary.com/cld2904/image/upload/v1661797330/sslarge-backgroudremove_qukkue.png">
+                <h4 class="mt-8 mb-4" id="messages">Messages:</h4>
+                {% if contacts %}
+                {% for contact in contacts %}
+                <div class="booking-card mt-4 py-4">
+                    <div class="row row-cols-lg-2">
+                        <div class="col">
+                            <p>From: {{ contact.first_name }} {{ contact.last_name }}</p>
+                        </div>
+                        <div class="col">
+                            <p>Contact number: {{ contact.contact_number }}</p>
+                            <p>Email address: {{ contact.email_address }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p>Message content: {{ contact.message }}</p>
+                    </div>
+                    <div class="row">
+                        <a class="nav-link" aria-current="page" href="{% url 'clearmessage' contact.id %}">Clear
+                            message</a>
+                    </div>
                 </div>
-                <div class="row">
-                    <a class="nav-link" aria-current="page" href="{% url 'clearmessage' contact.id %}">Clear message</a>
-                </div>
-            </div>
-            {% endfor %}
-            {% else %}
-            <p>Currently no messages for Sushi & Sake!</p>
-            {% endif %}
+                {% endfor %}
+                {% else %}
+                <p>Currently no messages for Sushi & Sake!</p>
+                {% endif %}
+            </section>
             <div class="mt-4">
-                <a href="#PG_TOP"><p>Back to top</p></a>
+                <!-- Link to top of page -->
+                <a href="#PG_TOP">
+                    <p>Back to top</p>
+                </a>
             </div>
         </div>
     </div>

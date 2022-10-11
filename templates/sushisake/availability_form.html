@@ -8,13 +8,19 @@
             <div class="col-md-8 mt-8 offset-md-2 transbox">
                 <h1 class="border-bottom">Book a Table</h1>
                 {% if user.is_authenticated %}
+                <!-- Booking help -->
+                <section>
                     <div class="bk-warning text-center py-4">
                         <h4 class="menu-title">Please read before booking</h4>
                         <p>Opening times: 10:00-23:00</p>
                         <p>Please note that maximum slot time is 2 hours.</p>
                         <p>For bookings over 8 people, please <a href="{% url 'contact' %}">contact us</a>.</p>
-                        <img class="sushi-branding mt-0" src="https://res.cloudinary.com/cld2904/image/upload/v1661797330/sslarge-backgroudremove_qukkue.png">
+                        <img class="sushi-branding mt-0"
+                            src="https://res.cloudinary.com/cld2904/image/upload/v1661797330/sslarge-backgroudremove_qukkue.png">
                     </div>
+                </section>
+                <!-- Availability booking form -->
+                <section>
                     <form method="POST" class="mt-4">
                         {{ form.as_p }}
                         {% csrf_token %}
@@ -22,9 +28,10 @@
                             <button class="btn btn-sign" type="submit">Book Table</button>
                         </div>
                     </form>
+                </section>
                 {% else %}
-                    <p>Please <a href="{% url 'account_login' %}">login to your account</a> 
-                        or <a href="{% url 'account_signup' %}">register</a> to book a table!</p>
+                <p>Please <a href="{% url 'account_login' %}">login to your account</a>
+                    or <a href="{% url 'account_signup' %}">register</a> to book a table!</p>
                 {% endif %}
             </div>
         </div>

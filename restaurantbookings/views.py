@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import FormView, View
 from django.contrib import messages
-from restaurantbookings.booking_functions.availability import check_availability
+from restaurantbookings.booking_functions.availability import (
+    check_availability)
 from .models import Table, Booking, FoodItem, Contact
 from .forms import AvailabilityForm, ContactForm
 
@@ -28,8 +29,10 @@ class BookingView(FormView):
         # filter the list of tables for the requested location
         location_list = Table.objects.filter(location=data['table_location'])
         # check the availability of tables and that they have enough seats
-        check_tables = check_availability(data['booking_date_time_start'], data['booking_date_time_end'], data['people'])
-        # if tables are in the right location and are available, add them to available tables list
+        check_tables = (check_availability(data['booking_date_time_start'],
+                        data['booking_date_time_end'], data['people']))
+        # if tables are in the right location and are available,
+        # add them to available tables list
         for table in tables:
             if table in location_list and table in check_tables:
                 available_tables.append(table)
@@ -46,13 +49,16 @@ class BookingView(FormView):
             )
             booking.save()
             # Return success message to user
-            messages.success(self.request, 'Your booking has been successful! \n'
-                             f'Your table has been booked from {booking.booking_date_time_start}\n'
+            messages.success(self.request, 'Your booking has been \n'
+                             f'successful! Your table has been booked from\n'
+                             f' {booking.booking_date_time_start}\n'
                              f' to {booking.booking_date_time_end}')
             return HttpResponseRedirect(reverse('sushisake'))
         else:
             # If no table available, return error message to user
-            messages.error(self.request, 'Sorry, the table type for this time is full, please try a different time. ')
+            messages.error(self.request, 'Sorry, the table type for this \n'
+                                         'time is full, please try a \n'
+                                         'different  time. ')
             return HttpResponseRedirect(reverse('BookTable'))
 
 

@@ -6,8 +6,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mt-8 offset-md-2 transbox">
-                <h1 class="border-bottom">Edit Booking</h1>
-                {% if user.is_authenticated %}
+                <main>
+                    <!-- Availability form for editing bookings -->
+                    <h1 class="border-bottom">Edit Booking</h1>
+                    {% if user.is_authenticated %}
                     <form method="POST" class="mt-4">
                         {{ form.as_p }}
                         {% csrf_token %}
@@ -15,10 +17,11 @@
                             <button class="btn btn-sign mx-4" type="submit">Update Booking</button>
                         </div>
                     </form>
-                {% else %}
-                    <p>Please <a href="{% url 'account_login' %}">login to your account</a> 
+                    {% else %}
+                    <p>Please <a href="{% url 'account_login' %}">login to your account</a>
                         or <a href="{% url 'account_signup' %}">register</a> to book a table!</p>
-                {% endif %}
+                    {% endif %}
+                </main>
             </div>
         </div>
     </div>
