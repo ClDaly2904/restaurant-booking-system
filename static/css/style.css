@@ -49,6 +49,15 @@ ul {
     color: #ef716b;
 }
 
+.sushi-branding {
+    width: 10%;
+    margin-top: 10%;
+}
+
+a:hover {
+    color: white;
+}
+
 
 /* Navbar */
 
@@ -247,6 +256,11 @@ footer i {
 
 .menu-title {
     color: #ef716b;
+}
+
+.menu-branding {
+    width: 20%;
+    margin-top: 5%;
 }
 
 
