@@ -5,7 +5,10 @@
 <div class="home-background img-fluid">
     <div class="container px-4 py-5 text-center">
         <div class="transbox mt-8">
-            <h1>Admin Dashboard</h1>
+            <h1 id="PG_TOP">Admin Dashboard</h1>
+            <div>
+                <a href="#messages">Jump to messages</a>
+            </div>
             <h4 class="mt-4 mb-4">Guest Bookings:</h4>
             {% if bookings %}
             {% for booking in bookings %}
@@ -24,11 +27,9 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-6">
-                        <input type="hidden" name="next" value="{{ request.path }}">
                         <a class="nav-link" aria-current="page" href="{% url 'editbooking' booking.id %}">Edit booking</a>
                     </div>
                     <div class="col-md-6">
-                        <input type="hidden" name="next" value="{{ request.path }}">
                         <a class="nav-link" aria-current="page" href="{% url 'confirmdelete' booking.id %}">Cancel/clear booking</a>
                     </div>
                 </div>
@@ -37,27 +38,33 @@
             {% else %}
             <p>Currently no bookings for Sushi & Sake!</p>
             {% endif %}
-            <h4 class="mt-8 mb-4">Messages:</h4>
-            {% if contactmessages %}
-            {% for contactmessage in contactmessages %}
+            <h4 class="mt-8 mb-4" id="messages">Messages:</h4>
+            {% if contacts %}
+            {% for contact in contacts %}
             <div class="booking-card mt-4 py-4">
                 <div class="row row-cols-lg-2">
                     <div class="col">
-                        <p>From: {{ contactmessage.first_name }} {{ contactmessage.last_name }}</p>
+                        <p>From: {{ contact.first_name }} {{ contact.last_name }}</p>
                     </div>
                     <div class="col">
-                        <p>Contact number: {{ contactmessage.contact_number }}</p>
-                        <p>Email address: {{ contactmessage.email_address }}</p>
+                        <p>Contact number: {{ contact.contact_number }}</p>
+                        <p>Email address: {{ contact.email_address }}</p>
                     </div>
                 </div>
                 <div class="row">
-                    <p>Message content: {{ contactmessage.message }}</p>
+                    <p>Message content: {{ contact.message }}</p>
+                </div>
+                <div class="row">
+                    <a class="nav-link" aria-current="page" href="{% url 'clearmessage' contact.id %}">Clear message</a>
                 </div>
             </div>
             {% endfor %}
             {% else %}
             <p>Currently no messages for Sushi & Sake!</p>
             {% endif %}
+            <div class="mt-4">
+                <a href="#PG_TOP"><p>Back to top</p></a>
+            </div>
         </div>
     </div>
 </div>

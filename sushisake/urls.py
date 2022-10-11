@@ -22,6 +22,7 @@ urlpatterns = [
     path('menu/', views.GetMenu.as_view(), name='menu'),
     path('contact/', views.ContactView.as_view(), name='contact'),
     path('admindashboard/', views.AdminDashboard.as_view(), name='admin_dashboard'),
+    path('clearmessage/<contact_id>', views.ConfirmClearMessage.as_view(), name='clearmessage'),
     path('admin/', admin.site.urls),
     path('restaurantbookings/', include('restaurantbookings.urls')),
     path('accounts/', include('allauth.urls')),

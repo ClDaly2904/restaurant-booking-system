@@ -174,8 +174,11 @@ class ConfirmDelete(View):
     """ Creates view where users can delete booking objects """
     def get(self, request, booking_id):
         """ Get requested booking """
+        queryset = Booking.objects.filter(id=booking_id)
+        booking = get_object_or_404(queryset)
         context = {
-            'booking_id': booking_id
+            'booking_id': booking_id,
+            'booking': booking
         }
 
         return render(
@@ -208,9 +211,41 @@ class AdminDashboard(View):
     def get(self, request):
         """ Retrieve all booking and message objects """
         bookings = Booking.objects.all()
-        contactmessages = Contact.objects.all()
+        contacts = Contact.objects.all()
         context = {
             'bookings': bookings,
-            'contactmessages': contactmessages
+            'contacts': contacts
         }
         return render(request, 'sushisake/admin_dashboard.html', context)
+
+
+class ConfirmClearMessage(View):
+    """ Creates view where users can delete booking objects """
+    def get(self, request, contact_id):
+        """ Get requested message """
+        queryset = Contact.objects.filter(id=contact_id)
+        contact = get_object_or_404(queryset)
+        context = {
+            'contact_id': contact_id,
+            'contact': contact
+        }
+
+        return render(
+            request,
+            "sushisake/confirm_clear_message.html", context)
+
+    def post(self, request, contact_id):
+        """ On confirmation, delete selected message """
+        contact = get_object_or_404(Contact, id=contact_id)
+
+        if request.method == "POST":
+            # delete message
+            contact.delete()
+            # return success message to user
+            messages.success(request, 'The message has been cleared!')
+            # redirect user back to their previous page
+            return redirect('admin_dashboard')
+
+        return render(
+            request,
+            "sushisake/confirm_clear_message.html")

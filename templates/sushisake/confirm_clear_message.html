@@ -1,0 +1,32 @@
+{% extends "sushisake/base.html" %}
+
+{% block content %}
+<div class="account-background img-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mt-8 mb-4 offset-md-2 transbox">
+                <h3>Are you sure you want to clear this message?</h3>
+                <div class="row mt-8 text-center">
+                    <p>Message from {{ contact.first_name }} {{ contact.last_name }} on {{ contact.created_on }}</p>
+                    <p>Message content: {{contact.message }}</p>
+                    <p>{{ contact.contact_number }} {{ contact.email_address }}</p>
+                </div>
+                <div class="row mt-8">
+                    <div class="col-md-6">
+                        <form method="POST">
+                            <div class="text-center">
+                                {% csrf_token %}
+                                <button class="btn btn-sign mx-4" id="cancelbtn" type="submit">Yes, clear message</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="nav-link" aria-current="page" href="{% url 'admin_dashboard' %}"><button class="btn btn-sign mx-4">No, I don't want to clear this message</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
