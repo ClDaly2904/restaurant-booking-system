@@ -18,7 +18,10 @@ from django.urls import path, include
 from restaurantbookings import views
 
 urlpatterns = [
-    path('', views.get_homepage.as_view(), name='sushisake'),
+    path('', views.GetHomepage.as_view(), name='sushisake'),
+    path('menu/', views.GetMenu.as_view(), name='menu'),
+    path('contact/', views.ContactView.as_view(), name='contact'),
+    path('admindashboard/', views.AdminDashboard.as_view(), name='admin_dashboard'),
     path('admin/', admin.site.urls),
     path('restaurantbookings/', include('restaurantbookings.urls')),
     path('accounts/', include('allauth.urls')),

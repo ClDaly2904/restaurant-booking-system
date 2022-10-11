@@ -33,4 +33,4 @@ def check_availability(booking_date_time_start, booking_date_time_end, people):
             avail_list.append(table)
 
     # return a list of all available tables
-    return (avail_list)
+    return avail_list
