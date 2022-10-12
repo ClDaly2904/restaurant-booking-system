@@ -30,8 +30,9 @@
                     </form>
                 </section>
                 {% else %}
-                <p>Please <a href="{% url 'account_login' %}">login to your account</a>
+                <p>Please <a href="{% url 'account_login' %}">login</a>  to your account
                     or <a href="{% url 'account_signup' %}">register</a> to book a table!</p>
+                <p>To manage existing bookings, please <a href="{% url 'account_login' %}">login</a>  to your account.</p>
                 {% endif %}
             </div>
         </div>
