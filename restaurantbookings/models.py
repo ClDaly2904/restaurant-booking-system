@@ -1,10 +1,11 @@
+""" Contains information for the models for the restaurant booking system """
 from django.db import models
 from django.conf import settings
 
 
 # Create your models here.
 class Table(models.Model):
-    """ Contains info on tables"""
+    """ Contains info on tables, used as foreign key in booking model"""
     TABLE_LOCATION = (
         ('IN', 'INSIDE SEATING'),
         ('OUT', 'OUTSIDE SEATING')
@@ -18,22 +19,28 @@ class Table(models.Model):
 
 
 class Booking(models.Model):
+    """ Contains model for booking """
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
     people = models.PositiveIntegerField()
     booking_date_time_start = models.DateTimeField()
     booking_date_time_end = models.DateTimeField()
-    guest = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    guest = models.ForeignKey(settings.AUTH_USER_MODEL,
+                              on_delete=models.CASCADE)
     additional_info = models.CharField(max_length=200, blank=True)
 
     class Meta:
+        """ Order by booking start time """
         ordering = ['booking_date_time_start']
 
     def __str__(self):
-        return f'{self.guest} has booked a table for {self.people} people for {self.booking_date_time_start} until {self.booking_date_time_end}'
+        return (f'{self.guest} has booked a table for {self.people}\n'
+                f' people for {self.booking_date_time_start} until \n'
+                f'{self.booking_date_time_end}')
 
 
 class FoodItem(models.Model):
-    """ Contains information for food items on menu including name, price, dietary"""
+    """ Contains information for food items on menu
+    including name, price, dietary requirements """
     categories = (
         ('SHARERS', 'sharers'),
         ('PLATTERS', 'platters'),
@@ -53,6 +60,8 @@ class FoodItem(models.Model):
 
 
 class Contact(models.Model):
+    """ Contains information for the contact model so guests can
+    send a message to the restaurant """
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=30)
     contact_number = models.BigIntegerField()
@@ -61,6 +70,7 @@ class Contact(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        """ show oldest messages at the top """
         ordering = ["-created_on"]
 
     def __str__(self):
