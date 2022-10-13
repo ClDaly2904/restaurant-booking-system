@@ -295,7 +295,7 @@ footer i {
 
 #msg {
     background-color: #f8be57;
-    z-index: 3;
+    z-index: 5;
     position: absolute;
 }
 
@@ -320,4 +320,14 @@ footer i {
 .guest-name {
     font-size: 1.2rem;
     text-decoration: underline;
+}
+
+/* Media Queries */
+
+/* For medium screen sizes 700px wide and down */
+
+@media screen and (max-width: 700px) {
+    #msg {
+        top: 20%;
+    }
 }

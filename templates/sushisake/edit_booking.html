@@ -3,26 +3,24 @@
 {% block content %}
 
 <div class="account-background img-fluid">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mt-8 offset-md-2 transbox">
-                <main>
-                    <!-- Availability form for editing bookings -->
-                    <h1 class="border-bottom">Edit Booking</h1>
-                    {% if user.is_authenticated %}
-                    <form method="POST" class="mt-4">
-                        {{ form.as_p }}
-                        {% csrf_token %}
-                        <div class="text-center">
-                            <button class="btn btn-sign mx-4" type="submit">Update Booking</button>
-                        </div>
-                    </form>
-                    {% else %}
-                    <p>Please <a href="{% url 'account_login' %}">login to your account</a>
-                        or <a href="{% url 'account_signup' %}">register</a> to book a table!</p>
-                    {% endif %}
-                </main>
-            </div>
+    <div class="container px-4 py-5 text-center">
+        <div class="col-md-8 mt-8 offset-md-2 transbox">
+            <main>
+                <!-- Availability form for editing bookings -->
+                <h1 class="border-bottom">Edit Booking</h1>
+                {% if user.is_authenticated %}
+                <form method="POST" class="mt-4">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <div class="text-center">
+                        <button class="btn btn-sign mx-4" type="submit">Update Booking</button>
+                    </div>
+                </form>
+                {% else %}
+                <p>Please <a href="{% url 'account_login' %}">login to your account</a>
+                    or <a href="{% url 'account_signup' %}">register</a> to book a table!</p>
+                {% endif %}
+            </main>
         </div>
     </div>
 </div>
