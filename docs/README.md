@@ -30,6 +30,8 @@ Potential customers can explore the website to find out more about the restauran
 
 The website also contains an admin panel where restaurant staff can view and manage all of the restaurants bookings in addition to any messages left for the restaurant.
 
+The Sushi & Sake website was made with the Django framework and largely utilises HTML, CSS and Python, with a small amount of Javascript.
+
 A link to the live site can be found [here](https://sushi-and-sake.herokuapp.com/).
 
 ## User Experience
@@ -455,6 +457,12 @@ Flash messages have been implemented throughout Sushi & Sake's website to provid
 <summary>Google Maps iFrame</summary>
 <br>
 - I used a Google Maps iFrame to insert a map onto my contact page to help users find the restaurant
+</details>
+<br>
+<details>
+<summary>Cloudinary</summary>
+<br>
+- Cloud-based image and video management service. I used it to store all of my image files for the website
 </details>
 <br>
 

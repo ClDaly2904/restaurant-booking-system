@@ -131,11 +131,12 @@ footer {
     display: inline-block;
     background-color: #f8be57;
     border-top: 2px solid #ef716b;
+    color: black;
 }
 
 footer i {
-    color: #555b50 ;
     font-size: 1rem;
+    color: black;
 }
 
 
