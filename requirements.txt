@@ -13,6 +13,7 @@ phonenumberslite==8.12.56
 psycopg2==2.9.3
 pycrypto==2.6.1
 PyJWT==2.4.0
+python-dateutil==2.8.2
 python3-openid==3.2.0
 pytz==2022.2
 requests-oauthlib==1.3.1
