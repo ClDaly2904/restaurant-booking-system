@@ -15,6 +15,7 @@
     - [Colour Scheme and Fonts](#colour-scheme-and-fonts)
     - [Wireframes](#wireframes)
 - [Features](#features)
+- [Technologies Used](#technologies-used)
 - [Testing](#testing)
     - [Manual Testing](#manual-testing)
     - [Automated Testing](#automated-tested)
@@ -318,6 +319,9 @@ If they click the 'Delete booking' link, they are taken to a page that asks them
 ### Availability Checker
 As part of the booking system, I wrote a function that checks the availability of tables for a certain time. This is a key element of the booking system as it helps to avoid disappointing guests through double bookings. The check availability function evaluates which tables are big enough for the party size, checks existing bookings for their table numbers and returns the tables that are both big enough for the party sizes and are not already booked. The way that the system books the tables also returns the smallest available table for the amount of guests to avoid empty seats and loss of revenue (i.e. will avoid booking a party of 2 to a table with 8 seats if a 2 seater table is available). This allows the restaurant to fit in as many guests as possible and maximise their profit.
 
+### Form validation
+Both the contact and availability forms have validation for each field to ensure that the user cannot submit invalid data. If the user inputs invalid data, the website will raise a ValidationError and inform the user what they have done wrong. This helps users to fill out the forms more quickly and accurately and minimise user frustration.
+
 ### Accounts
 I used all-auth to create an accounts system for Sushi & Sake. If users do not have an account, they can follow a simple sign-up process to create one with their chosen username and password. Once their account is created, they can use their username and password to log in to their own account, where they can then make and manage their bookings.
 As the all-auth system includes different levels of user, the restaurant staff can sign in with their admin logins to access the admin dashboard. The authentication system means that users without an account cannot make or manage bookings.
@@ -334,6 +338,7 @@ As the all-auth system includes different levels of user, the restaurant staff c
 The admin dashboard can be accessed by restaurant staff to view a list of all bookings made to the restaurant and any messages left for them from the website.
 The list of bookings for the restaurant shows the nearest booking times at the top, and restaurant staff can clear these off as guests arrive so they can easily see the next guests they are expecting. They also have the functionality to edit and delete bookings if necessary, following the same steps as if a guest user was to do so. Even if an admin amends a booking, the booking name remains the same.
 The list of messages is at the bottom of the screen, displaying all of the information for the message. Although these cannot be edited, they can be deleted by the restaurant staff if they have been actioned. Pressing delete on a message from the admin dashboard takes the user to a screen to confirm deletion, and as with deleting bookings, displays the message details and content so that the user can check they are deleting the right message.
+Users can use the links to quickly jump between each section.
 
 <details><summary>Admin Dashboard</summary>
 
@@ -365,6 +370,97 @@ Flash messages have been implemented throughout Sushi & Sake's website to provid
 
 <br>
 
+## Technologies Used
+
+<details>
+<summary>Eyedropper Tool (Chrome Extension)</summary>
+<br>
+ - This tool allows me pick any colour from the web page I am and gives me the name (if applicable), hex, hsl and rgb values. I used this to make sure I was using the exact theme colours throughout the site
+</details>
+<details>
+<summary>WebAIM</summary>
+<br>
+- Contrast Checker - checks the contrast of colours input against the Web Content Accessibility Guidelines. I input my background and foreground/text colours to ensure they meet the WCAG AA/AAA standards
+- WAVE - WAVE can identify many accessibility and Web Content Accessibility Guideline (WCAG) errors
+</details>
+<details>
+<summary>Balsamiq wireframing tool</summary>
+<br>
+- To create wireframes and plan out my project before beginning to write it in Gitpod
+</details>
+<details>
+<summary>Canva</summary>
+<br>
+- I used the online logo maker to make the Sushi & Sake logo
+</details>
+<details>
+<summary>Fontawesome</summary>
+<br>
+- The social media icons on the footer are taken from FontAwesome
+</details>
+<details>
+<summary>Google Fonts</summary>
+<br>
+- Both my title and body fonts are imported from Google Fonts
+</details>
+<details>
+<summary>W3C Markup Validation Service</summary>
+<br>
+- I used the HTML validator to run both my html pages and ensure there were no errors
+- I used the Jigsaw CSS validator to ensure that my CSS file did not contain any errors
+</details>
+<details>
+<summary>Lighthouse (Chrome DevTools)</summary>
+<br>
+- An open-source, automated tool for improving the quality of web pages. I used it to audit performance, accessibility, SEO and best practices
+</details>
+<details>
+<summary>GitHub</summary>
+<br>
+-  To host my repository
+- To create user stories
+- To take an Agile approach by usign the project board to make iterations
+</details>
+<details>
+<summary>GitPod</summary>
+<br>
+- An open-source developer platform used to write my code (using VS Code)
+</details>
+<details>
+<summary>Visual Code Studio (VS Code)</summary>
+<br>
+- Visual Studio Code is a streamlined code editor with support for development operations like debugging, task running, and version control
+- I used several VS Code extensions to help make my work more efficient such as:
+    - Auto Close Tag (automatically adds HTML/XML closing tags)
+    - Auto Open Preview Page (opens a preview panel when markdown or asciidoc file is opened)
+</details>
+<details>
+<summary>Heroku</summary>
+<br>
+- To host my live site
+</details>
+<details>
+<summary>Heroku PostGreSQL database</summary>
+<br>
+- As a database to store my models and objects
+</details>
+<details>
+<summary>Bootstrap</summary>
+<br>
+- Bootstrap CSS framework helped me to create a responsive and visually stunning site without having to spend too much time writing CSS
+</details>
+<details>
+<summary>Django</summary>
+<br>
+- Django is a Python web framework that encourages rapid development. I used the Django framework, in particular the administration site to help manage my models and objects
+- Django allauth is an integrated set of Django applications dealing with account authentication, registration, management that I used for my user accounts
+</details>
+<details>
+<summary>Google Maps iFrame</summary>
+<br>
+- I used a Google Maps iFrame to insert a map onto my contact page to help users find the restaurant
+</details>
+
 ## Credits
 
 ### Form validation and inputs
@@ -389,6 +485,10 @@ Flash messages have been implemented throughout Sushi & Sake's website to provid
 - [Python3 documentation](https://docs.python.org/3/)
 - [W3 Schools](https://www.w3schools.com/python/)
 - As always, [Stack Overflow](https://stackoverflow.com/questions/36432954/ was a great resource for troubleshooting
+
+### Acknowledgements
+- My mentor, Precious Ijege for his constructive feedback
+- Gemma, Ed and Oisin at mentor support for helping me troubleshoot
 
 ### Inspiration
 For the design on Sushi & Sake's website, I took inspiration from other Japanese restaurants. One of my favourite local restaurants, [Kibou](https://kibou.co.uk/) not only has delicious food but also a visually stunning website that helped me cultivate the elevated feel of the Sushi & Sake website. I also browsed the [Yo! Sushi website](https://yosushi.com/) for menu ideas.
