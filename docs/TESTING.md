@@ -1,0 +1,4 @@
+- [Manual Testing](#manual-testing)
+- [Automated Testing](#automated-tested)
+- [Fixed bugs](#fixed-bugs)
+- [Validators](#validators)

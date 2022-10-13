@@ -17,10 +17,6 @@
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Testing](#testing)
-    - [Manual Testing](#manual-testing)
-    - [Automated Testing](#automated-tested)
-    - [Fixed bugs](#fixed-bugs)
-    - [Validators](#validators)
 - [Deployment](#deployment)
 - [Credits](#credits)
 
@@ -28,13 +24,13 @@
 
 ![Am I responsive screenshot](images/am-i-responsive.png)
 
-Sushi & Sake Japanese Kitchen is a website for a fictional Japanese restaurant. The code was written in Gitpod, with the repository stored in GitHub and hosted on Heroku with a PostGres SQL database.
+Sushi & Sake Japanese Kitchen is a website for a fictional Japanese restaurant. The code was written in Gitpod, with the repository stored in GitHub and hosted on Heroku with a PostGres database.
 
 Potential customers can explore the website to find out more about the restaurant, create or login to their account, and book a table if required. Customers also have access to full CRUD functionality to manage their bookings or send a message to the restaurant.
 
 The website also contains an admin panel where restaurant staff can view and manage all of the restaurants bookings in addition to any messages left for the restaurant.
 
-A link to the live site can be found here. *************
+A link to the live site can be found [here](https://sushi-and-sake.herokuapp.com/).
 
 ## User Experience
 
@@ -440,7 +436,7 @@ Flash messages have been implemented throughout Sushi & Sake's website to provid
 - To host my live site
 </details>
 <details>
-<summary>Heroku PostGreSQL database</summary>
+<summary>Heroku PostGres database</summary>
 <br>
 - As a database to store my models and objects
 </details>
@@ -460,6 +456,30 @@ Flash messages have been implemented throughout Sushi & Sake's website to provid
 <br>
 - I used a Google Maps iFrame to insert a map onto my contact page to help users find the restaurant
 </details>
+<br>
+
+## Testing 
+Testing notes for the Sushi & Sake Japanese Kitchen project are contained in a separate [TESTING.md](TESTING.md) file.
+
+## Deployment
+The live site for Sushi & Sake is hosted on Heroku, a platform that enables developers to build, run, and operate applications entirely in the cloud. To deploy the live site on Heroku, I wrote my code in GitPod then pushed the code to GitHub. Heroku uses the code in the GitHub repository to build the live site.
+
+To deploy the live site on Heroku:
+1. Create a Heroku account and log in
+2. Select to create a new app in Heroku. Give it a unique name and create new app
+3. Once the new app is created, we need to set up a few things.
+4. Under the 'Settings' tab, go to 'Add Buildpack button and click to add a buildpack. Select python. This helps Heroku understand it needs to build a Python app.
+5. This project uses Heroku Postgres for the database, so next we need to add that. Go to the 'Resources' tab and search for Heroku Postgres in the Add-ons box.
+6. Go back to the 'Settings' tab and click on 'Reveal Config-Vars'. Copy the 'DATABASE_URL' config var.
+7. In GitPod, create an env.py file and create a new DATABASE_URL variable using the value copied from Heroku.
+8. Back in Heroku, on the 'Settings' tab, add in the config-vars such as the SECRET_KEY
+9. The settings.py file in Gitpod will need to be updated with the information for the new SECRET_KEY and DATABASE
+10. Set up the html templates by adding a TEMPLATES_DIR variable with 'os.path.join(BASE_DIR, 'templates')'. Under TEMPLATES, update DIRS with the new variable
+11. To make sure the app can be run on the local development server and in Heroku, we need to update the ALLOWED HOSTS key in the settings.py file, it should be updated to include 'localhost' and your Heroku app url (https://'YOUR APP NAME'.herokuapp.com/)
+12. In the base directory on GitPod, create a Procfile and add 'web: gunicorn Your App Name.wsgi`'. This tells Heroku to create/run a web application.
+13. In Heroku, click on the 'Deploy' tab. Select GitHub in the 'Deployment Method' section. You can search for your repository and select it to connect the repo to Heroku. Heroku gives the option to either deploy the latest GitHub code automatically with automatic deploys or to manually deploy a selected branch.
+
+Full details for deploying to Heroku using Git can be found [here](https://devcenter.heroku.com/articles/git).
 
 ## Credits
 
@@ -479,6 +499,7 @@ Flash messages have been implemented throughout Sushi & Sake's website to provid
 - For setting up the project shell and database, I used the [Code Institute's](https://codeinstitute.net/) CodeStar Django Blog project
 - Koi karp background used for theme throughout website found on [Pixabay](https://pixabay.com/vectors/koi-carp-pattern-japanese-3338735/)
 - All of the images used on the site were found on [Pixabay](https://pixabay.com/) or [Unsplash](https://unsplash.com/) and then hosted on Cloudinary
+- To help with Heroku deployment steps [Medium](https://medium.com/featurepreneur/how-to-connect-github-to-heroku-be6ff27419d3)
 
 ### General
 - [Django documentation](https://docs.djangoproject.com/en/4.1/)
