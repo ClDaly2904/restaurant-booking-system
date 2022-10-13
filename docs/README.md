@@ -247,33 +247,123 @@ After the hero image on the home page, the first thing that users scroll to is t
 ### Gallery
 Found on the home page, users can view a gallery containing images of the restaurant and the restaurant's food. This is a great feature for first-time users who are not sure what to expect from Sushi & Sake and showcases the elegant dining experience they can expect from the restaurant.
 
+<details><summary>Gallery</summary>
+
+![Gallery](images/gallery.png)
+
+</details>
+
+<br>
+
 ### Reviews
 Also found on the home page, there is a section where users can read reviews about the restaurant. This addition helps to promote the restaurant and give users trust in it when they can see the positive experiences other people have had.
+
+<details><summary>Reviews</summary>
+
+![Reviews](images/reviews.png)
+
+</details>
+
+<br>
 
 ### Menu Page
 Users can view the menu for Sushi & Sake on their website. Potential customers can read through the tantalising dishes available to see if Sushi & Sake is right for them, including their budgets and all-important dietary requirements. As this page is built using template tags based on the Food Item model objects, the restaurant can easily update the menu themselves from the Django backend administration panel. This benefits the restaurant as they do not have to pay to get the menu updated each time. It also pleases their customers who can see any new and exciting dishes as well as avoiding disappointment hoping for ones no longer on the menu! The menu is split into sections for easy readability and contains a key for allergen information.
 
+<details><summary>Menu</summary>
+
+![Menu](images/menu.png)
+
+</details>
+
+<br>
+
 ### Contact Page
 The contact page contains all important information for users of the Sushi & Sake site. It displays the restaurant's opening hours, telephone number, email, and address including a Google maps insertion. The Google map can be viewed in full screen to give the user directions to the restaurant.
 At the bottom of the page, there is a contact form where users can leave a message for the restaurant. This message can be viewed by the restaurant in either the Django backend admininstration panel or, more easily, by the admin dashboard. The message form has fields for name, number, email and message so that the restaurant can see who has messaged them and so that they have the information to contact the customer back if necessary.
+
+<details><summary>Contact</summary>
+
+![Contact](images/contact.png)
+
+</details>
+
+<br>
 
 ### Booking Page and Booking Form
 The booking page contains two main elements- a help box at the top of the screen and the booking form itself. The help box outlines key information to help users input data such as opening times (the form will not submit if requested time is outside operating hours), and the maximum time they can book. This helps to streamline the booking process to lessen the chance of users getting frustrated and not continuing with the booking process.
 The booking form itself contains clearly labelled fields with helper text so that users know what they should enter in each field. Users can pick their chosen table location, the number of guests the booking will be for, and their chosen booking start and end times. Each field has validation so that the form will not submit if the input data is not valid. If the booking is accepted, a flash message will confirm the reservation. If there is no available table for the booking time requested, the message will reflect this.
 A successful booking will create a booking object that can be viewed by the guest in their 'my bookings' page, by the restaurant staff in the 'admin dashboard', or in the Django backend administration panel.
 
+<details><summary>Book a Table</summary>
+
+![Book a Table](images/booking.png)
+
+</details>
+
+<br>
+
 ### Booking Management (Customer) and My Bookings Page
 If a guest user is logged in, they can view a list of their bookings by clicking on the 'My Bookings' page. The page displays the information for each booking (time, date, number of guests) as well as the option to edit or delete each booking.
+If they click the 'Edit booking' link, they are taken to a page that provides a booking form prepopulated with the previous booking details. This means that the user does not have to remember and re-input each form field, they only have to alter any fields they wish to change. Once they click the 'Update Booking' button, a flash message confirms that the booking has been updated.
+If they click the 'Delete booking' link, they are taken to a page that asks them to confirm if they want to delete the selected booking. This screen once again brings up the details for the booking so they can check if they have selected the right one. If they select yes, then a flash message pops up to confirm the booking has been deleted. Selecting no takes them back to the bookings page.
 
-### Check availability function
+<details><summary>My Bookings</summary>
+
+![My Bookings](images/my-bookings.png)
+
+</details>
+
+<br>
+
+### Availability Checker
+As part of the booking system, I wrote a function that checks the availability of tables for a certain time. This is a key element of the booking system as it helps to avoid disappointing guests through double bookings. The check availability function evaluates which tables are big enough for the party size, checks existing bookings for their table numbers and returns the tables that are both big enough for the party sizes and are not already booked. The way that the system books the tables also returns the smallest available table for the amount of guests to avoid empty seats and loss of revenue (i.e. will avoid booking a party of 2 to a table with 8 seats if a 2 seater table is available). This allows the restaurant to fit in as many guests as possible and maximise their profit.
 
 ### Accounts
+I used all-auth to create an accounts system for Sushi & Sake. If users do not have an account, they can follow a simple sign-up process to create one with their chosen username and password. Once their account is created, they can use their username and password to log in to their own account, where they can then make and manage their bookings.
+As the all-auth system includes different levels of user, the restaurant staff can sign in with their admin logins to access the admin dashboard. The authentication system means that users without an account cannot make or manage bookings.
 
-### Call to action booking buttons
+<details><summary>Login</summary>
 
-### Flash messages
+![Login](images/login.png)
 
-### Booking management (Restaurant)
+</details>
+
+<br>
+
+### Admin Dashboard
+The admin dashboard can be accessed by restaurant staff to view a list of all bookings made to the restaurant and any messages left for them from the website.
+The list of bookings for the restaurant shows the nearest booking times at the top, and restaurant staff can clear these off as guests arrive so they can easily see the next guests they are expecting. They also have the functionality to edit and delete bookings if necessary, following the same steps as if a guest user was to do so. Even if an admin amends a booking, the booking name remains the same.
+The list of messages is at the bottom of the screen, displaying all of the information for the message. Although these cannot be edited, they can be deleted by the restaurant staff if they have been actioned. Pressing delete on a message from the admin dashboard takes the user to a screen to confirm deletion, and as with deleting bookings, displays the message details and content so that the user can check they are deleting the right message.
+
+<details><summary>Admin Dashboard</summary>
+
+![Admin Dashboard](images/admin-dashboard.png)
+
+</details>
+
+<br>
+
+### Call to Action Buttons
+To encourage users to book a table with the restaurant, large 'Book Table' call to action buttons are placed throughout the site. There is one in the navbar, several on the home page, one on the menu and a link on the contact page. As they are brightly coloured, they stand out and encourage users to click on them and book a table with the restaurant.
+
+<details><summary>Call to Action Buttons</summary>
+
+![Call to action buttons](images/cta-button.png)
+
+</details>
+
+<br>
+
+### Flash Messages
+Flash messages have been implemented throughout Sushi & Sake's website to provide user feedback and confirmation of actions. They appear when a user logs in or out, makes a booking, updates a booking, deletes a booking, sends a message or deletes a message. This confirmation of actions helps to enhance the user experience by giving them confidence that certain actions have been completed.
+
+<details><summary>Flash Message</summary>
+
+![Flash message](images/flash-message.png)
+
+</details>
+
+<br>
 
 ## Credits
 
