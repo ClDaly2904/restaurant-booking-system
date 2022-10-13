@@ -1,3 +1,5 @@
+""" File contains all of the inputs and validations for the
+availability and contact forms """
 import pytz
 from dateutil import parser
 from django import forms
@@ -9,6 +11,7 @@ from .models import Contact, Booking
 
 
 class AvailabilityForm(ModelForm):
+    """ Sets the inputs for the Availability form """
     TABLE_LOCATION = (
         ('IN', 'INSIDE SEATING'),
         ('OUT', 'OUTSIDE SEATING')
@@ -26,15 +29,18 @@ class AvailabilityForm(ModelForm):
     )
 
     def clean_people(self):
+        """ Contains validation for the people input """
         data = self.cleaned_data['people']
 
         # Check only one number input
         if data > 8:
-            raise ValidationError(_('Invalid number of people - please enter a number between 1 and 8'))
+            raise ValidationError(_('Invalid number of people /n'
+                                    '- please enter a number between 1 and 8'))
 
         # Check user has not entered 0
         if data <= 0:
-            raise ValidationError(_('Invalid number of people - please enter a number between 1 and 8'))
+            raise ValidationError(_('Invalid number of people /n'
+                                    '- please enter a number between 1 and 8'))
 
         # Return the cleaned data
         return data
@@ -46,12 +52,14 @@ class AvailabilityForm(ModelForm):
     )
 
     def clean_booking_date_time_start(self):
+        """ Contains the validation requirements for the booking start time """
         data = self.cleaned_data['booking_date_time_start']
         now = timezone.now()
 
         # Check if a date is not in the past.
         if data < now:
-            raise ValidationError(_('Invalid date/time - please select a date and time in the future.'))
+            raise ValidationError(_('Invalid date/time - please \n'
+                                    'select a date and time in the future.'))
 
         # check that end time is within opening times
         # get time from datetime obj
@@ -61,7 +69,8 @@ class AvailabilityForm(ModelForm):
 
         # raise validation error if hour is bigger than or equal to closing
         if start_hour < 10:
-            raise ValidationError(_('Invalid start time- restaurant opens at 10:00.'))
+            raise ValidationError(_('Invalid start time- restaurant \n'
+                                    'opens at 10:00.'))
 
         # Return the cleaned data.
         return data
@@ -73,6 +82,7 @@ class AvailabilityForm(ModelForm):
     )
 
     def clean_booking_date_time_end(self):
+        """ Contains the validation requirements for the booking end time """
         data = self.cleaned_data['booking_date_time_end']
         now = timezone.now()
         start_time_input = self.data['booking_date_time_start']
@@ -84,11 +94,14 @@ class AvailabilityForm(ModelForm):
 
         # Check if a date is not in the past.
         if data < now:
-            raise ValidationError(_('Invalid date/time - please select a date and time in the future.'))
+            raise ValidationError(_('Invalid date/time - please select a \n'
+                                    'date and time in the future.'))
 
         # check that date time end is after date time start
         if data < start_time:
-            raise ValidationError(_('Invalid date/time - please make sure that booking end time is after booking start time.'))
+            raise ValidationError(_('Invalid date/time - please make sure \n'
+                                    'that booking end time is after \n'
+                                    'booking start time.'))
 
         # check that slot is not longer than 2 hours
         # find differentce between start time and end time
@@ -100,7 +113,8 @@ class AvailabilityForm(ModelForm):
 
         # raise validation error is difference is greater than 2 hours
         if thrs > 2:
-            raise ValidationError(_('Invalid end time- maximum slot time is 2 hours.'))
+            raise ValidationError(_('Invalid end time- maximum slot \n'
+                                    'time is 2 hours.'))
 
         # check that end time is within opening times
         # get time from datetime obj
@@ -110,7 +124,8 @@ class AvailabilityForm(ModelForm):
 
         # raise validation error if hour is bigger than or equal to closing
         if end_hour >= 23:
-            raise ValidationError(_('Invalid end time- restaurant closes at 23:00.'))
+            raise ValidationError(_('Invalid end time- restaurant closes \n'
+                                    'at 23:00.'))
 
         # Return the cleaned data.
         return data
@@ -118,16 +133,20 @@ class AvailabilityForm(ModelForm):
     additional_info = forms.CharField(
         label='Additional Info',
         required=False,
-        widget=forms.Textarea(attrs={'placeholder': 'Please enter any additional information (max 400 characters)', 'rows': 2})
+        widget=forms.Textarea(attrs={'placeholder': 'Please enter \n'
+                                     'any additional information (max \n'
+                                     '400 characters)', 'rows': 2})
     )
 
     class Meta:
-        """ """
+        """ Specifies to use the booking model """
         model = Booking
-        fields = ('table_location', 'people', 'booking_date_time_start', 'booking_date_time_end')
+        fields = ('table_location', 'people', 'booking_date_time_start',
+                  'booking_date_time_end')
 
 
 class ContactForm(ModelForm):
+    """ Contains for the information for the contact form """
     first_name = forms.CharField(
         label='First Name',
         required=True,
@@ -135,6 +154,7 @@ class ContactForm(ModelForm):
     )
 
     def clean_first_name(self):
+        """ Contains validation requirements for the first name input """
         data = self.cleaned_data['first_name']
 
         if not data.isalpha():
@@ -149,6 +169,7 @@ class ContactForm(ModelForm):
     )
 
     def clean_last_name(self):
+        """ Contains validation requirements for last name input """
         data = self.cleaned_data['last_name']
 
         if not data.isalpha():
@@ -163,6 +184,7 @@ class ContactForm(ModelForm):
     )
 
     def clean_contact_number(self):
+        """ Contains validation requirements for the contact number input """
         data = self.cleaned_data['contact_number']
 
         # convert data to string and check length is phone number
@@ -180,10 +202,13 @@ class ContactForm(ModelForm):
     message = forms.CharField(
         label='Message',
         required=True,
-        widget=forms.Textarea(attrs={'placeholder': 'Please enter your message (max 400 characters)', 'rows': 3})
+        widget=forms.Textarea(attrs={'placeholder': 'Please enter your \n'
+                                     'message (max 400 characters)',
+                                     'rows': 3})
     )
 
     def clean_message(self):
+        """ Contains validation information for the message input """
         data = self.cleaned_data['message']
 
         # check to see that message isn't just spaces
@@ -196,6 +221,7 @@ class ContactForm(ModelForm):
         return data
 
     class Meta:
-        """ """
+        """ Specifies to use contact model as a base """
         model = Contact
-        fields = ('first_name', 'last_name', 'email_address', 'contact_number', 'message')
+        fields = ('first_name', 'last_name', 'email_address',
+                  'contact_number', 'message')
