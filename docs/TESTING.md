@@ -93,7 +93,6 @@ I ran different pages from Sushi & Sake's website through Chrome Dev Tool's Ligh
 
 <br>
 
-
 ### JSHint Javascript Validator 
 The Sushi & Sake website only uses a small amount of Javascript. The snippet was taken from the Code Institute's CodeStar blog for flash messages. It passed the JS validation with no error other than a couple of undefined variables (set outside the scope of the snippet).
 <details><summary>JSHint</summary>
