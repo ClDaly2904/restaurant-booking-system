@@ -1,7 +1,7 @@
 """ Automated testing for the views.py file """
 from django.test import TestCase
 from django.contrib.auth.models import User
-from restaurantbookings.models import Booking, Contact
+from restaurantbookings.models import Booking, Contact, Table
 
 
 class TestGuestViews(TestCase):
@@ -17,10 +17,21 @@ class TestGuestViews(TestCase):
             password="dpReporter"
         )
 
+        Table.objects.create(
+            number=19,
+            no_seats=6,
+            location="OUT",
+        )
+
+        table_list = Table.objects.all()
+        table = table_list[0]
+
         Booking.objects.create(
+            first_name="Clark",
+            last_name="Kent",
             guest=test_user,
-            table=2,
-            people=2,
+            table=table,
+            people="2",
             booking_date_time_start="2022-10-13 12:53:00+00:00",
             booking_date_time_end="2022-10-13 13:53:00+00:00",
         )
@@ -34,33 +45,36 @@ class TestGuestViews(TestCase):
             password="dpReporter"
         )
 
-    def test_home_view_get(self):
+    def test_home_view(self):
         """ Test home view renders correctly """
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'index.html', 'base.html')
+        self.assertTemplateUsed(response, 'sushisake/index.html',
+                                'sushisake/base.html')
 
-    def test_menu_view_get(self):
+    def test_menu_view(self):
         """ Test menu page renders correctly """
         response = self.client.get('/menu/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'menu.html', 'base.html')
+        self.assertTemplateUsed(response, 'sushisake/menu.html',
+                                'sushisake/base.html')
 
     def test_booking_view(self):
         """ Test that availability booking form renders correctly """
         self.log_in()
         response = self.client.get('/restaurantbookings/book/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'availability_form.html',
-                                'base.html')
+        self.assertTemplateUsed(response, 'sushisake/availability_form.html',
+                                'sushisake/base.html')
 
     def test_user_bookings_view(self):
         """ Test view for users to see a list of their bookings """
         # page requires user to be logged in
         self.log_in()
-        response = self.client.get('/restaurantbookings/my_bookings/')
+        response = self.client.get('/restaurantbookings/mybookings/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'user_bookings.html', 'base.html')
+        self.assertTemplateUsed(response, 'sushisake/user_bookings.html',
+                                'sushisake/base.html')
 
     def test_edit_booking_view(self):
         """ Test view for users to edit their bookings """
@@ -68,7 +82,8 @@ class TestGuestViews(TestCase):
         self.log_in()
         response = self.client.get('/restaurantbookings/editbooking/1/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'edit_booking.html', 'base.html')
+        self.assertTemplateUsed(response, 'sushisake/edit_booking.html',
+                                'sushisake/base.html')
 
     def confirm_delete_view(self):
         """ Test view for users to edit their bookings """
@@ -76,7 +91,8 @@ class TestGuestViews(TestCase):
         self.log_in()
         response = self.client.get('/restaurantbookings/confirmdelete/1/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'confirm_delete.html', 'base.html')
+        self.assertTemplateUsed(response, 'sushisake/confirm_delete.html',
+                                'sushisake/base.html')
 
 
 class TestSuperViews(TestCase):
@@ -92,9 +108,18 @@ class TestSuperViews(TestCase):
             password="dpReporter"
         )
 
+        Table.objects.create(
+            number=19,
+            no_seats=6,
+            location="OUT",
+        )
+
+        table_list = Table.objects.all()
+        table = table_list[0]
+
         Booking.objects.create(
             guest=test_superuser,
-            table=2,
+            table=table,
             people=2,
             booking_date_time_start="2022-10-13 12:53:00+00:00",
             booking_date_time_end="2022-10-13 13:53:00+00:00",
@@ -118,25 +143,27 @@ class TestSuperViews(TestCase):
             password="dpReporter"
         )
 
-    def test_home_view_get(self):
+    def test_home_view(self):
         """ Test home view renders correctly """
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'index.html', 'base.html')
+        self.assertTemplateUsed(response, 'sushisake/index.html',
+                                'sushisake/base.html')
 
-    def test_menu_view_get(self):
+    def test_menu_view(self):
         """ Test menu page renders correctly """
         response = self.client.get('/menu/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'menu.html', 'base.html')
+        self.assertTemplateUsed(response, 'sushisake/menu.html',
+                                'sushisake/base.html')
 
     def test_booking_view(self):
         """ Test that availability booking form renders correctly """
         self.log_in()
         response = self.client.get('/restaurantbookings/book/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'availability_form.html',
-                                'base.html')
+        self.assertTemplateUsed(response, 'sushisake/availability_form.html',
+                                'sushisake/base.html')
 
     def test_admin_dashoard(self):
         """ Test view for admin to view list of bookings and messages """
@@ -144,7 +171,8 @@ class TestSuperViews(TestCase):
         self.log_in()
         response = self.client.get('/admindashboard/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'admin_dashboard.html', 'base.html')
+        self.assertTemplateUsed(response, 'sushisake/admin_dashboard.html',
+                                'sushisake/base.html')
 
     def test_edit_booking_view(self):
         """ Test view for users to edit their bookings """
@@ -152,7 +180,8 @@ class TestSuperViews(TestCase):
         self.log_in()
         response = self.client.get('/restaurantbookings/editbooking/1/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'edit_booking.html', 'base.html')
+        self.assertTemplateUsed(response, 'sushisake/edit_booking.html',
+                                'sushisake/base.html')
 
     def confirm_delete_view(self):
         """ Test view for users to edit their bookings """
@@ -160,7 +189,8 @@ class TestSuperViews(TestCase):
         self.log_in()
         response = self.client.get('/restaurantbookings/confirmdelete/1/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'confirm_delete.html', 'base.html')
+        self.assertTemplateUsed(response, 'sushisake/confirm_delete.html',
+                                'sushisake/base.html')
 
     def confirm_clear_message_view(self):
         """ Test view for users to edit their bookings """
@@ -168,5 +198,6 @@ class TestSuperViews(TestCase):
         self.log_in()
         response = self.client.get('/clearmessage/1/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'confirm_clear_message.html',
-                                'base.html')
+        self.assertTemplateUsed(response,
+                                'sushisake/confirm_clear_message.html',
+                                'sushisake/base.html')

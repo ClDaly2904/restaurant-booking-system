@@ -12,6 +12,7 @@ def check_availability(booking_date_time_start, booking_date_time_end, people):
 
     # check every table to ensure it has enough seats for the guests
     big_enough_tables = Table.objects.filter(no_seats__gte=people)
+    print(big_enough_tables)
 
     # create empty list to hold existing bookings
     existing_bookings = []
