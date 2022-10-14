@@ -519,6 +519,7 @@ Full details for deploying to Heroku using Git can be found [here](https://devce
 - To help with Heroku deployment steps [Medium](https://medium.com/featurepreneur/how-to-connect-github-to-heroku-be6ff27419d3)
 - Article from Slack to help fix the dateutil error in TESTING [Slack](https://stackoverflow.com/questions/55568383/dateutil-syntax-error-while-deploying-flask-application)
 - Article showing how to add messages to class based views by [Serhat Teker](https://dev.to/serhatteker/show-message-in-class-based-views-django-4a4d)
+- Stack Overflow article showing how to check template used for views.py file tests answer by [alecxe](https://stackoverflow.com/questions/23895656/how-to-check-the-name-of-the-template)
 
 ### General
 - [Django documentation](https://docs.djangoproject.com/en/4.1/)
