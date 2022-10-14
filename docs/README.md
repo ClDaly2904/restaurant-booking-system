@@ -181,6 +181,11 @@ Before building my site in Gitpod, I took all of the features I thought to be in
 - [User Bookings wireframe](wireframes/user-bookings-wireframe.png)
 - [Admin Dashboard](wireframes/admin-dashboard-wireframe.png)
 
+### Entity Relationship Diagram
+As Python is an object-orientated programming language, I took some time to consider what objects would be involved in the booking system, how they would related to each other, and what attributes those objects would have
+
+![Entity relationship diagram](images/entity-relationship.png)
+
 ## Features
 
 ### Logo
@@ -458,11 +463,15 @@ Flash messages have been implemented throughout Sushi & Sake's website to provid
 <br>
 - I used a Google Maps iFrame to insert a map onto my contact page to help users find the restaurant
 </details>
-<br>
 <details>
 <summary>Cloudinary</summary>
 <br>
 - Cloud-based image and video management service. I used it to store all of my image files for the website
+</details>
+<details>
+<summary>Miro</summary>
+<br>
+- Online flowchart maker used to make entity relationship diagram
 </details>
 <br>
 
