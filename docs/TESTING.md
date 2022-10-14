@@ -155,5 +155,77 @@ If an input does not meet the validation requirements, or a required field is em
 - I tested the site on family and friends and another piece of feedback recieved was to do with the booking form. The feedback was that it wasn't very user friendly for customers to have to remember and give their account username when they arrived at the restaurant to retrieve their reservation. After this feedback, I added the 'First Name' and 'Last Name' fields to the booking form that guests can simply give their name to the restaurant to retrieve their reservation.
 
 ## Automated Testing
+As well as manual testing, I wrote a series of automated tests for my restaurantbookings/views.py file.
 
 ## Fixed Bugs
+This project was definitely a large learning curve, but I enjoyed problem solving and building my Django project. Having the debug=True setting for building and testing meant that most of the little errors and bugs could be solved along the way, but a few were definitely head-scratchers!
+
+<details>
+<summary>Heroku deployment- 'No Module named dateutil' error</summary>
+<br>
+
+After setting up the inital shell for the project in GitPod, I deployed my live site on Heroku early to make sure it was all set up, and checked in with it after each large implementation to check the functionality. However, after making large changes to the restaurantbookings/forms.py file, I encountered an error where Heroku would not properly deploy the live site as it could not find 'dateutil'.
+
+This was puzzling at first, as the project was working absolutely fine on the local server. I checked that dateutil was installed by entering 'pip3 install python-dateutil' in the terminal, but got the response that the conditions were already satisfied. I checked in my requirements.txt and could not see dateutil, so I typed the pip3 freeze command to updated requirements.txt. No changes.
+
+After scouring the web, I found a Slack article (in credits) that told me to uninstall python-dateutil and install it. It seems that the pre-installed date-util was an old version, and as soon as I did the pip command to update requirements.txt and the dateutil requirement appeared, which could now be passed along to Heroku.
+
+</details>
+
+<details>
+<summary>Incorrect URL files</summary>
+<br>
+
+Whilst trying to understand how to create a URL to contain a booking id, I discovered that I had made an error with my URLS files. I had pathed out all of the URLS in both the sushisake main urls.py file and the restaurantbookings urls.py file, which was throwing up error messages and unneccessary code.
+
+I removed some urls from the main sushisake url file, as they were already covered by the 'include restaurantbookings' url line.
+
+</details>
+
+<details>
+<summary>Templating bug for id url</summary>
+<br>
+
+Whilst creating the update part of the CRUD functionality for bookings, I needed to pass the booking id into the edit booking url. I kept getting the error that the booking id url was invalid and could not be found.
+
+To troubleshoot, I reviewed the code for the Code Institute blog where the slug field was passed as a parameter for a url and the url link to it. My code matched so I decided that the error was not with the url setup. I went on to check the other factors affecting it, including the format of the href in the html template.
+
+I went in to realise that it was a templating/context error. I was trying to use the booking.id but what I had passed through to the update html context was 'user-booking'. I had referred to the booking object as 'user-booking' on the html template instead of booking so they didn't match. I updated the context to pass in 'bookings' instead of 'user-bookings' and it was working as expected.
+
+</details>
+
+<details>
+<summary>Changing the HTTP Response message to a flash message</summary>
+<br>
+
+The first draft of the booking functionality would redirect users to a HTTP Response page with either a booking success or booking failure message (depending on table availability). I wanted to change this so that users would instead recieve flash message feedback, and would be returned to a different html page within the Sushi & Sake site so that they could continue their experience.
+
+However, when trying to alter this code to return a flash message, I got the response that the 'HTTP Response did not return an object, it returned None'. Although the previous code had worked fine, I couldn't figure out how to merge the working code and my desire for a flash message.
+
+After a chat with Gemma from tutor support, she helped me to understand that the way I was trying implement the flash messages was more for function based views. She sent me a helpful article (in credits) which showed me how to add flash messages to class based views by adding in 'self.' before the request so that this argument could then be passed into the message.
+
+</details>
+<details>
+<summary>Availability logic</summary>
+<br>
+
+Whilst testing the availability logic to avoid double booking in the availability.py file, I noticed that the booking system kept assigning unavailable tables to new bookings. It was returning the smallest possible table for the party size, regardless of whether the table already had bookings for that time frame.
+
+The orginal code for the availability logic was based off a tutorial for a hotel system (in credits), but that code was for a hotel management system that was only checking the availability of a specific room rather than a list of objects like I was trying to do by checking all of the restaurant's tables. This led to a complete overhaul of the availability logic and the way the problem was approached.
+
+Instead of checking every table all at once for the booking times, I took a more incremental approach. I started by creating a list of tables that were big enough for the party size. Then I found a list of all the existing bookings and made another list of those table numbers. Finally I made a list of available tables by adding any tables that were both big enough and were NOT in the list of already booked tables.
+</details>
+
+<details><summary>Original availability logic</summary>
+
+![Original availability logic](images/testing/original-avail-logic.png)
+
+</details>
+
+<details><summary>Final availability logic</summary>
+
+![Final availability logic](images/testing/final-avail.png)
+
+</details>
+
+<br>
