@@ -17,8 +17,9 @@
                 {% for booking in bookings %}
                 <div class="booking-card mt-4 py-4">
                     <div class="row row-cols-lg-2">
-                        <div class="col guest-name">
-                            <p>Guest name: {{ booking.guest }}</p>
+                        <div class="col">
+                            <p class="guest-name">Booking name: {{ booking.first_name }} {{ booking.last_name }}</p>
+                            <p>Guest: {{ booking.id }}</p>
                         </div>
                         <div class="col">
                             <p>Booking id: {{ booking.id }}</p>

@@ -41,6 +41,8 @@ class BookingView(FormView):
         if len(available_tables) > 0:
             table = available_tables[0]
             booking = Booking.objects.create(
+                first_name=data['first_name'],
+                last_name=data['last_name'],
                 guest=self.request.user,
                 table=table,
                 people=data['people'],

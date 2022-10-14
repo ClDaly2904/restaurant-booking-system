@@ -150,7 +150,9 @@ If an input does not meet the validation requirements, or a required field is em
 <br>
 
 ### Testing Feedback
-During the testing phase, after a meeting with my mentor I was given feedback that, for the restaurant staff, managing the restaurant bookings from the backend Django admin site wasn't very user friendly. This led to the creation of the admin panel on the main Sushi & Sake website. This became a very valuable addition to the site.
+- During the testing phase, after a meeting with my mentor I was given feedback that, for the restaurant staff, managing the restaurant bookings from the backend Django admin site wasn't very user friendly. This led to the creation of the admin panel on the main Sushi & Sake website. This became a very valuable addition to the site.
+
+- I tested the site on family and friends and another piece of feedback recieved was to do with the booking form. The feedback was that it wasn't very user friendly for customers to have to remember and give their account username when they arrived at the restaurant to retrieve their reservation. After this feedback, I added the 'First Name' and 'Last Name' fields to the booking form that guests can simply give their name to the restaurant to retrieve their reservation.
 
 ## Automated Testing
 

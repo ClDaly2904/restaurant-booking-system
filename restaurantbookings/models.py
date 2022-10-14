@@ -21,6 +21,8 @@ class Table(models.Model):
 class Booking(models.Model):
     """ Contains model for booking """
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=30)
     people = models.PositiveIntegerField()
     booking_date_time_start = models.DateTimeField()
     booking_date_time_end = models.DateTimeField()

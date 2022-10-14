@@ -22,6 +22,36 @@ class AvailabilityForm(ModelForm):
         required=True
     )
 
+    first_name = forms.CharField(
+        label='First Name',
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'First Name'}),
+    )
+
+    def clean_first_name(self):
+        """ Contains validation requirements for the first name input """
+        data = self.cleaned_data['first_name']
+
+        if not data.isalpha():
+            raise ValidationError(_('Please only enter letters'))
+
+        return data
+
+    last_name = forms.CharField(
+        label='Last Name',
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Last Name'}),
+    )
+
+    def clean_last_name(self):
+        """ Contains validation requirements for last name input """
+        data = self.cleaned_data['last_name']
+
+        if not data.isalpha():
+            raise ValidationError(_('Please only enter letters'))
+
+        return data
+
     people = forms.IntegerField(
         label='Number of people',
         required=True,
@@ -141,8 +171,9 @@ class AvailabilityForm(ModelForm):
     class Meta:
         """ Specifies to use the booking model """
         model = Booking
-        fields = ('table_location', 'people', 'booking_date_time_start',
-                  'booking_date_time_end')
+        fields = ('first_name', 'last_name', 'table_location',
+                  'people', 'booking_date_time_start',
+                  'booking_date_time_end', 'additional_info')
 
 
 class ContactForm(ModelForm):
