@@ -146,6 +146,10 @@ class AvailabilityForm(ModelForm):
             raise ValidationError(_('Invalid end time- maximum slot \n'
                                     'time is 2 hours.'))
 
+        if thrs < 1:
+                        raise ValidationError(_('Invalid end time- minimum slot \n'
+                                    'time is 1 hour.'))
+
         # check that end time is within opening times
         # get time from datetime obj
         time = data.time()
