@@ -37,9 +37,7 @@ class TestGuestViews(TestCase):
         )
 
     def log_in(self):
-        """ This is to help test the views
-        that require a user to be logged in
-        to access """
+        """ Login in user for pages that require authentication """
         self.client.login(
             username="ck",
             password="dpReporter"
@@ -135,9 +133,8 @@ class TestSuperViews(TestCase):
         )
 
     def log_in(self):
-        """ This is to help test the views
-        that require a user to be logged in
-        to access """
+        """ Login superuser for pages that require higher
+        authentication """
         self.client.login(
             username="ck",
             password="dpReporter"

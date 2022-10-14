@@ -2,7 +2,7 @@
 
 - [Validators](#validators)
 - [Manual Testing](#manual-testing)
-- [Automated Testing](#automated-tested)
+- [Automated Testing](#automated-testing)
 - [Fixed bugs](#fixed-bugs)
 
 ## Validators
@@ -103,6 +103,22 @@ The Sushi & Sake website only uses a small amount of Javascript. The snippet was
 
 <br>
 
+### WEBAIM Contrast Checker
+The main Sushi & Sake theme colours include dark grey and black background colours with white, red and yellow accents. I tested the main colours through the WEBAIM Contrast checker to ensure their accessibility.
+<details><summary>Contrast check 1</summary>
+
+![Contrast check 1](images/testing/contrast-checker.png)
+
+</details>
+
+<details><summary>Contrast check 2</summary>
+
+![Contrast check 2](images/testing/contrast-checker2.png)
+
+</details>
+
+<br>
+
 ## Manual Testing
 ### Responsiveness
 
@@ -155,7 +171,11 @@ If an input does not meet the validation requirements, or a required field is em
 - I tested the site on family and friends and another piece of feedback recieved was to do with the booking form. The feedback was that it wasn't very user friendly for customers to have to remember and give their account username when they arrived at the restaurant to retrieve their reservation. After this feedback, I added the 'First Name' and 'Last Name' fields to the booking form that guests can simply give their name to the restaurant to retrieve their reservation.
 
 ## Automated Testing
-As well as manual testing, I wrote a series of automated tests for my restaurantbookings/views.py file.
+As well as manual testing, I wrote a series of automated tests for my restaurantbookings/views.py file. I tested that all of the views were rendering the correct template for the url. This was especially important for urls that required arguments (booking and contact message ids) to make sure that the right page and object was being retrieved.
+I tested the views for both a regular guest user and as a restaurant staff user as both have access to different pages. To run these tests, I had to temporarily revert the project back to the defaut sqlite3 database as they could not be run on the deployed Heroku Postgres. To do this, I changed the DATABASES variable in the settings.py file and once all tests were passing reverted it back to the Postgres.
+Originally, all of the tests were failing. Once reason because I had forgotten to import the 'Table' model so I could not create an instance of 'Table' to create a booking object. The second was because I forgot to add the 'sushisake/' in front of my html template filenames, assertTemplateUsed was coming up False. After fixing these errors, all automated tests pass.
+
+![Automated testing pass screenshot](images/testing/auto-tests.png)
 
 ## Fixed Bugs
 This project was definitely a large learning curve, but I enjoyed problem solving and building my Django project. Having the debug=True setting for building and testing meant that most of the little errors and bugs could be solved along the way, but a few were definitely head-scratchers!
