@@ -10,6 +10,9 @@
             <div class="row g-2 py-2 mb-2 mt-2 mb-2 text-center booking-card">
                 <p>Table for {{ booking.people }} from {{ booking.booking_date_time_start }}
                     until {{ booking.booking_date_time_end }}</p>
+                {% if booking.additional_info %}
+                    <p>Additional information: {{ booking.additional_info }}</p>
+                {% endif %}
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <a class="nav-link" aria-current="page" href="{% url 'editbooking' booking.id %}">Edit

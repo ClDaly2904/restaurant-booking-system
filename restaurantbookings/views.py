@@ -47,7 +47,8 @@ class BookingView(FormView):
                 table=table,
                 people=data['people'],
                 booking_date_time_start=data['booking_date_time_start'],
-                booking_date_time_end=data['booking_date_time_end']
+                booking_date_time_end=data['booking_date_time_end'],
+                additional_info=data['additional_info']
             )
             booking.save()
             # Return success message to user

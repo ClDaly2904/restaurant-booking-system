@@ -29,6 +29,9 @@
                         <p>Table number {{ booking.table.number }}({{ booking.table.location }}), for
                             {{ booking.people }} from {{ booking.booking_date_time_start }} until
                             {{ booking.booking_date_time_end }}</p>
+                        {% if booking.additional_info %}
+                            <p>Additional information: {{ booking.additional_info }}</p>
+                        {% endif %}
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-6">
